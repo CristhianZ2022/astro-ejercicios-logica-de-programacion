@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@astrojs/ts-plugin": "^1.10.6",
+    "@astrojs/vercel": "^9.0.2",
     "@tailwindcss/vite": "^4.1.17",
     "astro": "^5.16.4",
     "eslint-plugin-import": "^2.32.0",
