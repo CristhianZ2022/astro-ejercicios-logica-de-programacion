@@ -1,9 +1,33 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
 ---
 
-<Layout title='Ejercicios de programacion'>
-	<Welcome />
+<Layout title="Ejercicios de lógica y programación">
+  <section class="h-[calc(100vh-64px)] bg-linear-to-br from-gray-900 via-purple-900 to-gray-900 text-white flex items-center">
+    <div class="container mx-auto px-6 text-center">
+      <h1 class="text-5xl md:text-7xl font-black mb-6">
+        Mejora tu lógica de<br><span class="text-purple-400">programación</span>
+      </h1>
+      <p class="text-xl md:text-2xl mb-10 text-gray-300 max-w-3xl mx-auto">
+        +100 ejercicios reales ordenados por dificultad. Sin teoría innecesaria, solo código y soluciones explicadas.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-6 justify-center mt-12">
+        <a href="/lvl1" class="bg-purple-600 hover:bg-purple-700 text-white font-bold text-xl px-10 py-5 rounded-xl shadow-lg transform hover:scale-105 transition">
+          Empezar Nivel 1
+        </a>
+        <a href="/niveles" class="border-2 border-purple-400 hover:bg-purple-400/20 text-white font-bold text-xl px-10 py-5 rounded-xl transition">
+          Ver todos los niveles →
+        </a>
+      </div>
+
+      <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div><span class="text-4xl font-bold text-purple-400">300+</span><p class="text-gray-400">Ejercicios</p></div>
+        <div><span class="text-4xl font-bold text-purple-400">3</span><p class="text-gray-400">Niveles</p></div>
+        <div><span class="text-4xl font-bold text-purple-400">0</span><p class="text-gray-400">Teoría aburrida</p></div>
+        <div><span class="text-4xl font-bold text-purple-400">100%</span><p class="text-gray-400">Práctica</p></div>
+      </div>
+    </div>
+  </section>
 </Layout>
