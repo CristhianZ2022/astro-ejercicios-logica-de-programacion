@@ -1,8 +1,9 @@
 ---
 export const prerender = false;
 
-import Layout from "../../layouts/Layout.astro";
+import Layout from "@layouts/Layout.astro";
 import { ejercicios } from "../../lib/data.js";
+import CodeDisplay from "@components/CodeDisplay";
 
 const { level } = Astro.params;
 const ejerciciosDelNivel = ejercicios.filter((e) => e.nivel === Number(level));
@@ -56,6 +57,9 @@ const ejerciciosDelNivel = ejercicios.filter((e) => e.nivel === Number(level));
                     style={`width: ${ej.tasaExito}%`}
                   />
                 </div>
+              </div>
+              <div>
+                <CodeDisplay client:visible codigo={ej.codigo} descripcion={ej.descripcion} />
               </div>
             </div>
           ))
