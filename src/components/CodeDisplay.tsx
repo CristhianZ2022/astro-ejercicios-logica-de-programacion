@@ -37,7 +37,7 @@ export default function CodeDisplay({ codigo, descripcion }: CodeDisplayProps) {
       >
         <div className="mb-6">
           <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-3">
-            Ejemplo
+            Descripcion
           </h3>
           <pre className="bg-gray-100 dark:bg-gray-900 p-4 rounded-xl text-sm overflow-hidden whitespace-pre-wrap wrap-break-word break-all text-gray-800 dark:text-gray-200">
             {descripcion}
@@ -59,6 +59,9 @@ export default function CodeDisplay({ codigo, descripcion }: CodeDisplayProps) {
           >
             <CopyText />
           </button>
+          <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-3">
+            Código
+          </h3>
           <pre className="bg-gray-900 text-gray-100 p-6 pt-16 rounded-xl overflow-auto text-sm font-mono leading-relaxed">
             {codigo}
           </pre>
