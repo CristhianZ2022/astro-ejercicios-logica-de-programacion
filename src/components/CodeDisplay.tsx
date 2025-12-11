@@ -35,15 +35,7 @@ export default function CodeDisplay({ codigo, descripcion }: CodeDisplayProps) {
           visible ? "max-h-full opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="mb-6">
-          <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-3">
-            Descripcion
-          </h3>
-          <pre className="bg-gray-100 dark:bg-gray-900 p-4 rounded-xl text-sm overflow-hidden whitespace-pre-wrap wrap-break-word break-all text-gray-800 dark:text-gray-200">
-            {descripcion}
-          </pre>
-        </div>
-        <div className="relative">
+        <div className="relative rounded-xl bg-gray-900 shadow-lg overflow-hidden">
           <div
             className={`absolute top-3 right-16 z-10 transition-all duration-300 pointer-events-none ${
               copied ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0"
