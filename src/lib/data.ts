@@ -158,7 +158,13 @@ export const ejercicios: Ejercicio[] = [
     dificultad: "fácil",
     descripcion: "Invierte el orden de los caracteres en una cadena de texto.",
     ejemplo: "invertir('Hola') // 'aloH'",
-    codigo: "",
+    codigo: `function invertir(texto) {
+  let textoInvertido = "";
+  for (let i = texto.length - 1; i >= 0; i--) {
+    textoInvertido += texto[i];
+  }
+  return textoInvertido;
+}`,
     tasaExito: 95,
   },
   {
@@ -168,9 +174,21 @@ export const ejercicios: Ejercicio[] = [
     nivel: 2,
     dificultad: "medio",
     descripcion:
-      "Cuenta el número de palabras en un texto, considerando espacios como separadores.",
+      "Crea un programa que cuente el numero de palabras y cuantas veces se repite cada palabra, y que muestre el recuento final de todas ellas. Una palabra es la misma en mayúsculas y minúsculas.",
     ejemplo: "contarPalabras('Hola mundo') // 2",
-    codigo: "",
+    codigo: `function contarRepeticiones(texto) {
+  let palabras = texto.toLowerCase().split(" ");
+  let palabrasRepetidas = {};
+  for(let i = 0; palabras.length > i; i++) {
+    let palabra = palabras[i];
+    if (palabrasRepetidas[palabra]) {
+      palabrasRepetidas[palabra]++;
+    } else {
+      palabrasRepetidas[palabra] = 1;
+    }
+  }
+  console.log(palabrasRepetidas);
+}`,
     tasaExito: 93,
   },
   {
@@ -181,7 +199,15 @@ export const ejercicios: Ejercicio[] = [
     dificultad: "medio",
     descripcion: "Convierte un número decimal a su representación binaria.",
     ejemplo: "decimalABinario(10) // '1010'",
-    codigo: "",
+    codigo: `function binario(decimal) {
+  let binario = "";
+  while (decimal > 0) {
+    let resto = decimal % 2;
+    binario = resto + binario;
+    decimal = Math.floor(decimal / 2);
+  }
+  return binario;
+}`,
     tasaExito: 89,
   },
   {
@@ -193,7 +219,33 @@ export const ejercicios: Ejercicio[] = [
     descripcion:
       "Convierte texto a código Morse y viceversa, utilizando una tabla de mapeo.",
     ejemplo: "textoAMorse('SOS') // '... --- ...'",
-    codigo: "",
+    codigo: `function codigoMorse(texto) {
+  const morse = {
+    'a': '.-',    'b': '-...', 'c': '-.-.', 'd': '-..',  'e': '.',
+    'f': '..-.',  'g': '--.',  'h': '....', 'i': '..',   'j': '.---',
+    'k': '-.-',   'l': '.-..', 'm': '--',   'n': '-.',   'o': '---',
+    'p': '.--.',  'q': '--.-', 'r': '.-.',  's': '...',  't': '-',
+    'u': '..-',   'v': '...-', 'w': '.--',  'x': '-..-', 'y': '-.--',
+    'z': '--..',  '0': '-----','1': '.----','2': '..---','3': '...--',
+    '4': '....-','5': '.....','6': '-....','7': '--...','8': '---..',
+    '9': '----.'
+  };
+  
+  return texto.toLowerCase().split("").map(letra => morse[letra]).join(" ");
+}
+
+function codigoMorseInverso(code) {
+  const dic = {
+    '.-':'a','-...':'b','-.-.':'c','-..':'d','.':'e','..-.':'f','--.':'g',
+    '....':'h','..':'i','.---':'j','-.-':'k','.-..':'l','--':'m','-.':'n',
+    '---':'o','.--.':'p','--.-':'q','.-.':'r','...':'s','-':'t','..-':'u',
+    '...-':'v','.--':'w','-..-':'x','-.--':'y','--..':'z','-----':'0',
+    '.----':'1','..---':'2','...--':'3','....-':'4','.....':'5','-....':'6',
+    '--...':'7','---..':'8','----.':'9'
+  };
+
+  return code.split('   ').map(palabra => palabra.split(' ').map(code => dic[code]).join('')).join(' ');
+}`,
     tasaExito: 91,
   },
   {
@@ -205,7 +257,23 @@ export const ejercicios: Ejercicio[] = [
     descripcion:
       "Verifica si los paréntesis, llaves y corchetes en una expresión están correctamente balanceados.",
     ejemplo: "equilibrado('()[]{}') // true",
-    codigo: "",
+    codigo: `function comprobarBalanceo(expresion) {
+  let llaves = [];
+  const pares = {"(" : ")", "[" : "]", "{" : "}"};
+
+  for (let char of expresion) {
+    if(char in pares) {
+      llaves.push(char);
+    } else if (char === ')' || char === ']' || char === '}') {
+      if (llaves.length === 0) return false;
+
+      let ultimoLlave = llaves.pop();
+
+      if(pares[ultimoLlave] !== char) return false;
+    }
+  }
+  return llaves.length === 0;
+}`,
     tasaExito: 88,
   },
   {
@@ -217,7 +285,18 @@ export const ejercicios: Ejercicio[] = [
     descripcion:
       "Elimina todas las ocurrencias de un carácter específico de una cadena.",
     ejemplo: "eliminar('banana', 'a') // 'bnn'",
-    codigo: "",
+    codigo: `function diferencia(str1, str2) {
+  let out1 = "";
+  let out2 = "";
+  for (let char of str1) {
+    if (!str2.includes(char)) out1 += char;
+  }
+  for (let char of str2) {
+    if (!str1.includes(char)) out2 += char;
+  }
+  console.log(out1);
+  console.log(out2);
+}`,
     tasaExito: 92,
   },
   {
@@ -229,7 +308,11 @@ export const ejercicios: Ejercicio[] = [
     descripcion:
       "Determina si una palabra o frase es un palíndromo, leyendo igual de izquierda a derecha que de derecha a izquierda.",
     ejemplo: "esPalindromo('radar') // true",
-    codigo: "",
+    codigo: `function palindromo(texto) {
+  let textoLimpio = texto.toLowerCase().replace(/\s+/g, '');
+  let textoReversido = textoLimpio.split("").reverse().join("");
+  return textoLimpio === textoReversido ? true : false;
+}`,
     tasaExito: 96,
   },
   {
@@ -240,7 +323,10 @@ export const ejercicios: Ejercicio[] = [
     dificultad: "medio",
     descripcion: "Calcula el factorial de un número utilizando recursión.",
     ejemplo: "factorial(5) // 120",
-    codigo: "",
+    codigo: `function factorial(numero) {
+  if (numero === 0) return 1;
+  return numero * factorial(numero - 1);  
+}`,
     tasaExito: 90,
   },
   {
@@ -252,7 +338,16 @@ export const ejercicios: Ejercicio[] = [
     descripcion:
       "Comprueba si un número es narcisista o de Armstrong, es decir, si la suma de sus dígitos elevados a la potencia de la cantidad de dígitos es igual al número.",
     ejemplo: "esArmstrong(153) // true",
-    codigo: "",
+    codigo: `function esArmstrong(numero) {
+  const digitos = numero.toString().split("");
+  let armstrong = 0;
+  for (let i = 0; i < digitos.length; i++) {
+    armstrong += parseInt(digitos[i]) ** digitos.length;
+  }
+  if (armstrong !== numero) return false;
+
+  return true
+}`,
     tasaExito: 84,
   },
   {
@@ -263,7 +358,44 @@ export const ejercicios: Ejercicio[] = [
     dificultad: "fácil",
     descripcion: "Calcula el número de días entre dos fechas dadas.",
     ejemplo: "diasEntre('2023-01-01', '2023-01-05') // 4",
-    codigo: "",
+    codigo: `function diasEntreFechas(fecha1, fecha2) {
+  const fecha1Array = fecha1.split("/");
+  const fecha2Array = fecha2.split("/");
+
+  if (fecha1Array.length !== 3 || fecha2Array.length !== 3) {
+    console.log("Las fechas no son correctas");
+  }
+
+  const [dia1, mes1, año1] = fecha1Array;
+  const [dia2, mes2, año2] = fecha2Array;
+
+  let dias = 0;
+
+  if(año1 !== año2) {
+    if(año1 > año2) {
+      return console.log("El año 1 es posterior al año 2");
+    }
+    dias += Number(año2 - año1) * 365;
+
+  }
+  
+  if (mes1 !== mes2) {
+    if (mes1 > mes2) {
+      return console.log("El mes 1 es posterior al mes 2");
+    }
+    dias += Number(mes2 - mes1) * 30;
+
+  } 
+  
+  if (dia1 !== dia2) {
+    if (dia1 > dia2) {
+      return console.log("El dia 1 es posterior al dia 2");
+    }
+    dias += Number(dia2 - dia1);
+  }
+
+  return "Hay " + dias + " días entre " + fecha1Array + " y " + fecha2Array;
+}`,
     tasaExito: 89,
   },
   {
