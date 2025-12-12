@@ -1,3 +1,5 @@
+import dedent from "dedent";
+
 export interface Ejercicio {
   id: number;
   slug: string;
@@ -17,22 +19,25 @@ export const ejercicios: Ejercicio[] = [
     titulo: 'EL FAMOSO "FIZZ BUZZ"',
     nivel: 1,
     dificultad: "fácil",
-    descripcion:
-      "Implementa el clásico ejercicio Fizz Buzz: imprime números del 1 al 100, reemplazando múltiplos de 3 por 'Fizz', múltiplos de 5 por 'Buzz' y múltiplos de ambos por 'FizzBuzz'.",
+    descripcion: dedent`
+      Implementa el clásico ejercicio Fizz Buzz: imprime números del 1 al 100, reemplazando múltiplos de 3 por 'Fizz', múltiplos de 5 por 'Buzz' y múltiplos de ambos por 'FizzBuzz'.
+    `,
     ejemplo: "3 % 3 = 0 ? fizz",
-    codigo: `function fizzbuzz() {
-  for (let i = 1; i <= 100; i++) {
-    if (i % 3 == 0 && i % 5 == 0) {
-      console.log(i + " fizzbuzz");
-    } else if (i % 3 == 0) {
-      console.log(i + " fizz");
-    } else if (i % 5 == 0) {
-      console.log(i + " buzz");
-    } else {
-      console.log(i);
-    }
-  }
-}`,
+    codigo: dedent`
+      function fizzbuzz() {
+        for (let i = 1; i <= 100; i++) {
+          if (i % 3 == 0 && i % 5 == 0) {
+            console.log(i + " fizzbuzz");
+          } else if (i % 3 == 0) {
+            console.log(i + " fizz");
+          } else if (i % 5 == 0) {
+            console.log(i + " buzz");
+          } else {
+            console.log(i);
+          }
+        }
+      }
+    `,
     tasaExito: 98,
   },
   {
@@ -41,17 +46,20 @@ export const ejercicios: Ejercicio[] = [
     titulo: "¿ES UN ANAGRAMA?",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Determina si dos palabras son anagramas entre sí, es decir, si contienen exactamente las mismas letras con la misma frecuencia, ignorando mayúsculas y espacios.",
+    descripcion: dedent`
+      Determina si dos palabras son anagramas entre sí, es decir, si contienen exactamente las mismas letras con la misma frecuencia, ignorando mayúsculas y espacios.
+    `,
     ejemplo: "anagrama(Cara - arca) // true",
-    codigo: `function anagrama(word1, word2) {
-  if (word1.toLowerCase() === word2.toLowerCase()) return false;
-  let word1Array = word1.split("");
-  let word2Array = word2.split("");
-  word1Array.sort();
-  word2Array.sort();
-  return word1Array.join("") === word2Array.join("") ? true : false;
-}`,
+    codigo: dedent`
+      function anagrama(word1, word2) {
+        if (word1.toLowerCase() === word2.toLowerCase()) return false;
+        let word1Array = word1.split("");
+        let word2Array = word2.split("");
+        word1Array.sort();
+        word2Array.sort();
+        return word1Array.join("") === word2Array.join("") ? true : false;
+      }
+    `,
     tasaExito: 92,
   },
   {
@@ -60,19 +68,22 @@ export const ejercicios: Ejercicio[] = [
     titulo: "LA SUCESIÓN DE FIBONACCI",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Genera la secuencia de Fibonacci hasta un número dado o imprime los primeros n términos de esta sucesión matemática.",
+    descripcion: dedent`
+      Genera la secuencia de Fibonacci hasta un número dado o imprime los primeros n términos de esta sucesión matemática.
+    `,
     ejemplo: "fibonacci(5) // 0, 1, 1, 2, 3",
-    codigo: `function fibonacci() {
-  let fib = 0;
-  let fib2 = 1;
-  for (let i = 0; i < 50; i++) {
-    let fibNew = fib + fib2;
-    fib = fib2;
-    fib2 = fibNew;
-    console.log(fib);
-  }
-}`,
+    codigo: dedent`
+      function fibonacci() {
+        let fib = 0;
+        let fib2 = 1;
+        for (let i = 0; i < 50; i++) {
+          let fibNew = fib + fib2;
+          fib = fib2;
+          fib2 = fibNew;
+          console.log(fib);
+        }
+      }
+    `,
     tasaExito: 85,
   },
   {
@@ -81,24 +92,26 @@ export const ejercicios: Ejercicio[] = [
     titulo: "¿ES UN NÚMERO PRIMO?",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Comprueba si un número entero es primo, es decir, si solo es divisible por 1 y por sí mismo.",
+    descripcion: dedent`
+      Comprueba si un número entero es primo, es decir, si solo es divisible por 1 y por sí mismo.
+    `,
     ejemplo: "esPrimo(17) // true",
-    codigo: `function primo() {
-  const primos = [];
-  
-  for (let num = 2; num <= 100; num++) {
-    let esPrimo = true;
-    for (let i = 2; i <= Math.sqrt(num); i++) {
-      if (num % i === 0) {
-        esPrimo = false;
-        break;
+    codigo: dedent`
+      function primo() {
+        const primos = [];
+        
+        for (let num = 2; num <= 100; num++) {
+          let esPrimo = true;
+          for (let i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i === 0) {
+              esPrimo = false;
+              break;
+            }
+          }
+          if (esPrimo) primos.push(num);
+        }
       }
-    }
-    if (esPrimo) primos.push(num);
-  }
-}
-`,
+    `,
     tasaExito: 94,
   },
   {
@@ -107,22 +120,25 @@ export const ejercicios: Ejercicio[] = [
     titulo: "ÁREA DE UN POLÍGONO",
     nivel: 1,
     dificultad: "fácil",
-    descripcion:
-      "Calcula el área de un polígono regular dado el número de lados y la longitud de un lado.",
+    descripcion: dedent`
+      Calcula el área de un polígono regular dado el número de lados y la longitud de un lado.
+    `,
     ejemplo: "areaPoligono(6, 5) // 129.9",
-    codigo: `function area(pol, tipo) { 
-  let area = 0;
-  if (tipo === "Triangulo") {
-    area = (pol.base * pol.altura) / 2;
-    console.log("El área del Triángulo es: " + area);
-  } else if (tipo === "Cuadrado") {
-    area = Math.pow(pol.lado, 2);
-    console.log("El área del Cuadrado es: " + area);
-  } else if (tipo === "Rectángulo") {
-    area = pol.lado * pol.altura;
-    console.log("El área del Rectángulo es: " + area);
-  }
-}`,
+    codigo: dedent`
+      function area(pol, tipo) { 
+        let area = 0;
+        if (tipo === "Triangulo") {
+          area = (pol.base * pol.altura) / 2;
+          console.log("El área del Triángulo es: " + area);
+        } else if (tipo === "Cuadrado") {
+          area = Math.pow(pol.lado, 2);
+          console.log("El área del Cuadrado es: " + area);
+        } else if (tipo === "Rectángulo") {
+          area = pol.lado * pol.altura;
+          console.log("El área del Rectángulo es: " + area);
+        }
+      }
+    `,
     tasaExito: 90,
   },
   {
@@ -131,22 +147,24 @@ export const ejercicios: Ejercicio[] = [
     titulo: "ASPECT RATIO DE UNA IMAGEN",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Calcula el aspect ratio de una imagen a partir de sus dimensiones en píxeles y maneja diferentes formatos.",
+    descripcion: dedent`
+      Calcula el aspect ratio de una imagen a partir de sus dimensiones en píxeles y maneja diferentes formatos.
+    `,
     ejemplo: "aspectRatio(1920, 1080) // 16:9",
-    codigo: `async function aspectRatio(url) {
-  const img = new Image();
-  img.src = url;
+    codigo: dedent`
+      async function aspectRatio(url) {
+        const img = new Image();
+        img.src = url;
 
-  await img.decode();
+        await img.decode();
 
-  img.onload = () => {
-    const width = img.width;
-    const height = img.height;
-    const ratio = width / height;
-    console.log(ratio);
-  };
-}
+        img.onload = () => {
+          const width = img.width;
+          const height = img.height;
+          const ratio = width / height;
+          console.log(ratio);
+        };
+      }
     `,
     tasaExito: 87,
   },
@@ -156,15 +174,19 @@ export const ejercicios: Ejercicio[] = [
     titulo: "INVERTIENDO CADENAS",
     nivel: 1,
     dificultad: "fácil",
-    descripcion: "Invierte el orden de los caracteres en una cadena de texto.",
+    descripcion: dedent`
+      Invierte el orden de los caracteres en una cadena de texto.
+    `,
     ejemplo: "invertir('Hola') // 'aloH'",
-    codigo: `function invertir(texto) {
-  let textoInvertido = "";
-  for (let i = texto.length - 1; i >= 0; i--) {
-    textoInvertido += texto[i];
-  }
-  return textoInvertido;
-}`,
+    codigo: dedent`
+      function invertir(texto) {
+        let textoInvertido = "";
+        for (let i = texto.length - 1; i >= 0; i--) {
+          textoInvertido += texto[i];
+        }
+        return textoInvertido;
+      }
+    `,
     tasaExito: 95,
   },
   {
@@ -173,22 +195,25 @@ export const ejercicios: Ejercicio[] = [
     titulo: "CONTANDO PALABRAS",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Crea un programa que cuente el numero de palabras y cuantas veces se repite cada palabra, y que muestre el recuento final de todas ellas. Una palabra es la misma en mayúsculas y minúsculas.",
+    descripcion: dedent`
+      Crea un programa que cuente el numero de palabras y cuantas veces se repite cada palabra, y que muestre el recuento final de todas ellas. Una palabra es la misma en mayúsculas y minúsculas.
+    `,
     ejemplo: "contarPalabras('Hola mundo') // 2",
-    codigo: `function contarRepeticiones(texto) {
-  let palabras = texto.toLowerCase().split(" ");
-  let palabrasRepetidas = {};
-  for(let i = 0; palabras.length > i; i++) {
-    let palabra = palabras[i];
-    if (palabrasRepetidas[palabra]) {
-      palabrasRepetidas[palabra]++;
-    } else {
-      palabrasRepetidas[palabra] = 1;
-    }
-  }
-  console.log(palabrasRepetidas);
-}`,
+    codigo: dedent`
+      function contarRepeticiones(texto) {
+        let palabras = texto.toLowerCase().split(" ");
+        let palabrasRepetidas = {};
+        for(let i = 0; palabras.length > i; i++) {
+          let palabra = palabras[i];
+          if (palabrasRepetidas[palabra]) {
+            palabrasRepetidas[palabra]++;
+          } else {
+            palabrasRepetidas[palabra] = 1;
+          }
+        }
+        console.log(palabrasRepetidas);
+      }
+    `,
     tasaExito: 93,
   },
   {
@@ -197,17 +222,21 @@ export const ejercicios: Ejercicio[] = [
     titulo: "DECIMAL A BINARIO",
     nivel: 2,
     dificultad: "medio",
-    descripcion: "Convierte un número decimal a su representación binaria.",
+    descripcion: dedent`
+      Convierte un número decimal a su representación binaria.
+    `,
     ejemplo: "decimalABinario(10) // '1010'",
-    codigo: `function binario(decimal) {
-  let binario = "";
-  while (decimal > 0) {
-    let resto = decimal % 2;
-    binario = resto + binario;
-    decimal = Math.floor(decimal / 2);
-  }
-  return binario;
-}`,
+    codigo: dedent`
+      function binario(decimal) {
+        let binario = "";
+        while (decimal > 0) {
+          let resto = decimal % 2;
+          binario = resto + binario;
+          decimal = Math.floor(decimal / 2);
+        }
+        return binario;
+      }
+    `,
     tasaExito: 89,
   },
   {
@@ -216,36 +245,39 @@ export const ejercicios: Ejercicio[] = [
     titulo: "CÓDIGO MORSE",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Convierte texto a código Morse y viceversa, utilizando una tabla de mapeo.",
+    descripcion: dedent`
+      Convierte texto a código Morse y viceversa, utilizando una tabla de mapeo.
+    `,
     ejemplo: "textoAMorse('SOS') // '... --- ...'",
-    codigo: `function codigoMorse(texto) {
-  const morse = {
-    'a': '.-',    'b': '-...', 'c': '-.-.', 'd': '-..',  'e': '.',
-    'f': '..-.',  'g': '--.',  'h': '....', 'i': '..',   'j': '.---',
-    'k': '-.-',   'l': '.-..', 'm': '--',   'n': '-.',   'o': '---',
-    'p': '.--.',  'q': '--.-', 'r': '.-.',  's': '...',  't': '-',
-    'u': '..-',   'v': '...-', 'w': '.--',  'x': '-..-', 'y': '-.--',
-    'z': '--..',  '0': '-----','1': '.----','2': '..---','3': '...--',
-    '4': '....-','5': '.....','6': '-....','7': '--...','8': '---..',
-    '9': '----.'
-  };
-  
-  return texto.toLowerCase().split("").map(letra => morse[letra]).join(" ");
-}
+    codigo: dedent`
+      function codigoMorse(texto) {
+        const morse = {
+          'a': '.-',    'b': '-...', 'c': '-.-.', 'd': '-..',  'e': '.',
+          'f': '..-.',  'g': '--.',  'h': '....', 'i': '..',   'j': '.---',
+          'k': '-.-',   'l': '.-..', 'm': '--',   'n': '-.',   'o': '---',
+          'p': '.--.',  'q': '--.-', 'r': '.-.',  's': '...',  't': '-',
+          'u': '..-',   'v': '...-', 'w': '.--',  'x': '-..-', 'y': '-.--',
+          'z': '--..',  '0': '-----','1': '.----','2': '..---','3': '...--',
+          '4': '....-','5': '.....','6': '-....','7': '--...','8': '---..',
+          '9': '----.'
+        };
+        
+        return texto.toLowerCase().split("").map(letra => morse[letra]).join(" ");
+      }
 
-function codigoMorseInverso(code) {
-  const dic = {
-    '.-':'a','-...':'b','-.-.':'c','-..':'d','.':'e','..-.':'f','--.':'g',
-    '....':'h','..':'i','.---':'j','-.-':'k','.-..':'l','--':'m','-.':'n',
-    '---':'o','.--.':'p','--.-':'q','.-.':'r','...':'s','-':'t','..-':'u',
-    '...-':'v','.--':'w','-..-':'x','-.--':'y','--..':'z','-----':'0',
-    '.----':'1','..---':'2','...--':'3','....-':'4','.....':'5','-....':'6',
-    '--...':'7','---..':'8','----.':'9'
-  };
+      function codigoMorseInverso(code) {
+        const dic = {
+          '.-':'a','-...':'b','-.-.':'c','-..':'d','.':'e','..-.':'f','--.':'g',
+          '....':'h','..':'i','.---':'j','-.-':'k','.-..':'l','--':'m','-.':'n',
+          '---':'o','.--.':'p','--.-':'q','.-.':'r','...':'s','-':'t','..-':'u',
+          '...-':'v','.--':'w','-..-':'x','-.--':'y','--..':'z','-----':'0',
+          '.----':'1','..---':'2','...--':'3','....-':'4','.....':'5','-....':'6',
+          '--...':'7','---..':'8','----.':'9'
+        };
 
-  return code.split('   ').map(palabra => palabra.split(' ').map(code => dic[code]).join('')).join(' ');
-}`,
+        return code.split('   ').map(palabra => palabra.split(' ').map(code => dic[code]).join('')).join(' ');
+      }
+    `,
     tasaExito: 91,
   },
   {
@@ -254,26 +286,29 @@ function codigoMorseInverso(code) {
     titulo: "EXPRESIONES EQUILIBRADAS",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Verifica si los paréntesis, llaves y corchetes en una expresión están correctamente balanceados.",
+    descripcion: dedent`
+      Verifica si los paréntesis, llaves y corchetes en una expresión están correctamente balanceados.
+    `,
     ejemplo: "equilibrado('()[]{}') // true",
-    codigo: `function comprobarBalanceo(expresion) {
-  let llaves = [];
-  const pares = {"(" : ")", "[" : "]", "{" : "}"};
+    codigo: dedent`
+      function comprobarBalanceo(expresion) {
+        let llaves = [];
+        const pares = {"(" : ")", "[" : "]", "{" : "}"};
 
-  for (let char of expresion) {
-    if(char in pares) {
-      llaves.push(char);
-    } else if (char === ')' || char === ']' || char === '}') {
-      if (llaves.length === 0) return false;
+        for (let char of expresion) {
+          if(char in pares) {
+            llaves.push(char);
+          } else if (char === ')' || char === ']' || char === '}') {
+            if (llaves.length === 0) return false;
 
-      let ultimoLlave = llaves.pop();
+            let ultimoLlave = llaves.pop();
 
-      if(pares[ultimoLlave] !== char) return false;
-    }
-  }
-  return llaves.length === 0;
-}`,
+            if(pares[ultimoLlave] !== char) return false;
+          }
+        }
+        return llaves.length === 0;
+      }
+    `,
     tasaExito: 88,
   },
   {
@@ -282,21 +317,24 @@ function codigoMorseInverso(code) {
     titulo: "ELIMINANDO CARACTERES",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Elimina todas las ocurrencias de un carácter específico de una cadena.",
+    descripcion: dedent`
+      Elimina todas las ocurrencias de un carácter específico de una cadena.
+    `,
     ejemplo: "eliminar('banana', 'a') // 'bnn'",
-    codigo: `function diferencia(str1, str2) {
-  let out1 = "";
-  let out2 = "";
-  for (let char of str1) {
-    if (!str2.includes(char)) out1 += char;
-  }
-  for (let char of str2) {
-    if (!str1.includes(char)) out2 += char;
-  }
-  console.log(out1);
-  console.log(out2);
-}`,
+    codigo: dedent`
+      function diferencia(str1, str2) {
+        let out1 = "";
+        let out2 = "";
+        for (let char of str1) {
+          if (!str2.includes(char)) out1 += char;
+        }
+        for (let char of str2) {
+          if (!str1.includes(char)) out2 += char;
+        }
+        console.log(out1);
+        console.log(out2);
+      }
+    `,
     tasaExito: 92,
   },
   {
@@ -305,14 +343,17 @@ function codigoMorseInverso(code) {
     titulo: "¿ES UN PALÍNDROMO?",
     nivel: 1,
     dificultad: "fácil",
-    descripcion:
-      "Determina si una palabra o frase es un palíndromo, leyendo igual de izquierda a derecha que de derecha a izquierda.",
+    descripcion: dedent`
+      Determina si una palabra o frase es un palíndromo, leyendo igual de izquierda a derecha que de derecha a izquierda.
+    `,
     ejemplo: "esPalindromo('radar') // true",
-    codigo: `function palindromo(texto) {
-  let textoLimpio = texto.toLowerCase().replace(/\s+/g, '');
-  let textoReversido = textoLimpio.split("").reverse().join("");
-  return textoLimpio === textoReversido ? true : false;
-}`,
+    codigo: dedent`
+      function palindromo(texto) {
+        let textoLimpio = texto.toLowerCase().replace(/\s+/g, '');
+        let textoReversido = textoLimpio.split("").reverse().join("");
+        return textoLimpio === textoReversido ? true : false;
+      }
+    `,
     tasaExito: 96,
   },
   {
@@ -321,12 +362,16 @@ function codigoMorseInverso(code) {
     titulo: "FACTORIAL RECURSIVO",
     nivel: 2,
     dificultad: "medio",
-    descripcion: "Calcula el factorial de un número utilizando recursión.",
+    descripcion: dedent`
+      Calcula el factorial de un número utilizando recursión.
+    `,
     ejemplo: "factorial(5) // 120",
-    codigo: `function factorial(numero) {
-  if (numero === 0) return 1;
-  return numero * factorial(numero - 1);  
-}`,
+    codigo: dedent`
+      function factorial(numero) {
+        if (numero === 0) return 1;
+        return numero * factorial(numero - 1);  
+      }
+    `,
     tasaExito: 90,
   },
   {
@@ -335,19 +380,22 @@ function codigoMorseInverso(code) {
     titulo: "¿ES UN NÚMERO DE ARMSTRONG?",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Comprueba si un número es narcisista o de Armstrong, es decir, si la suma de sus dígitos elevados a la potencia de la cantidad de dígitos es igual al número.",
+    descripcion: dedent`
+      Comprueba si un número es narcisista o de Armstrong, es decir, si la suma de sus dígitos elevados a la potencia de la cantidad de dígitos es igual al número.
+    `,
     ejemplo: "esArmstrong(153) // true",
-    codigo: `function esArmstrong(numero) {
-  const digitos = numero.toString().split("");
-  let armstrong = 0;
-  for (let i = 0; i < digitos.length; i++) {
-    armstrong += parseInt(digitos[i]) ** digitos.length;
-  }
-  if (armstrong !== numero) return false;
+    codigo: dedent`
+      function esArmstrong(numero) {
+        const digitos = numero.toString().split("");
+        let armstrong = 0;
+        for (let i = 0; i < digitos.length; i++) {
+          armstrong += parseInt(digitos[i]) ** digitos.length;
+        }
+        if (armstrong !== numero) return false;
 
-  return true
-}`,
+        return true
+      }
+    `,
     tasaExito: 84,
   },
   {
@@ -356,57 +404,67 @@ function codigoMorseInverso(code) {
     titulo: "¿CUÁNTOS DÍAS?",
     nivel: 1,
     dificultad: "fácil",
-    descripcion: "Calcula el número de días entre dos fechas dadas.",
+    descripcion: dedent`
+      Calcula el número de días entre dos fechas dadas.
+    `,
     ejemplo: "diasEntre('2023-01-01', '2023-01-05') // 4",
-    codigo: `function diasEntreFechas(fecha1, fecha2) {
-  const fecha1Array = fecha1.split("/");
-  const fecha2Array = fecha2.split("/");
+    codigo: dedent`
+      function diasEntreFechas(fecha1, fecha2) {
+        const fecha1Array = fecha1.split("/");
+        const fecha2Array = fecha2.split("/");
 
-  if (fecha1Array.length !== 3 || fecha2Array.length !== 3) {
-    console.log("Las fechas no son correctas");
-  }
+        if (fecha1Array.length !== 3 || fecha2Array.length !== 3) {
+          console.log("Las fechas no son correctas");
+        }
 
-  const [dia1, mes1, año1] = fecha1Array;
-  const [dia2, mes2, año2] = fecha2Array;
+        const [dia1, mes1, año1] = fecha1Array;
+        const [dia2, mes2, año2] = fecha2Array;
 
-  let dias = 0;
+        let dias = 0;
 
-  if(año1 !== año2) {
-    if(año1 > año2) {
-      return console.log("El año 1 es posterior al año 2");
-    }
-    dias += Number(año2 - año1) * 365;
+        if(año1 !== año2) {
+          if(año1 > año2) {
+            return console.log("El año 1 es posterior al año 2");
+          }
+          dias += Number(año2 - año1) * 365;
 
-  }
-  
-  if (mes1 !== mes2) {
-    if (mes1 > mes2) {
-      return console.log("El mes 1 es posterior al mes 2");
-    }
-    dias += Number(mes2 - mes1) * 30;
+        }
+        
+        if (mes1 !== mes2) {
+          if (mes1 > mes2) {
+            return console.log("El mes 1 es posterior al mes 2");
+          }
+          dias += Number(mes2 - mes1) * 30;
 
-  } 
-  
-  if (dia1 !== dia2) {
-    if (dia1 > dia2) {
-      return console.log("El dia 1 es posterior al dia 2");
-    }
-    dias += Number(dia2 - dia1);
-  }
+        } 
+        
+        if (dia1 !== dia2) {
+          if (dia1 > dia2) {
+            return console.log("El dia 1 es posterior al dia 2");
+          }
+          dias += Number(dia2 - dia1);
+        }
 
-  return "Hay " + dias + " días entre " + fecha1Array + " y " + fecha2Array;
-}`,
+        return "Hay " + dias + " días entre " + fecha1Array + " y " + fecha2Array;
+      }
+    `,
     tasaExito: 89,
   },
   {
     id: 17,
     slug: "en-may-scula",
     titulo: "EN MAYÚSCULA",
-    nivel: 2,
-    dificultad: "medio",
-    descripcion: "Convierte todo el texto de entrada a mayúsculas.",
+    nivel: 1,
+    dificultad: "fácil",
+    descripcion: dedent`
+      Convierte todo el texto de entrada a mayúsculas.
+    `,
     ejemplo: "mayuscula('hola') // 'HOLA'",
-    codigo: "",
+    codigo: dedent`
+      function mayusculas(texto) {
+        return texto.toUpperCase();
+      }
+    `,
     tasaExito: 97,
   },
   {
@@ -415,10 +473,39 @@ function codigoMorseInverso(code) {
     titulo: "LA CARRERA DE OBSTÁCULOS",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Simula una carrera donde un personaje debe superar obstáculos en un camino aleatorio.",
+    descripcion: dedent`
+      Crea una función que evalúe si un/a atleta ha superado correctamente una carrera de obstáculos.
+      La función recibirá dos parámetros:
+      Un array que sólo puede contener String con las palabras "run" o "jump"
+      Un String que represente la pista y sólo puede contener "_" (suelo) o "|" (valla)
+      La función imprimirá cómo ha finalizado la carrera:
+      Si el/a atleta hace "run" en "_" (suelo) y "jump" en "|" (valla) será correcto y no variará el símbolo de esa parte de la pista.
+      - Si hace "jump" en "_" (suelo), se variará la pista por "x".
+      - Si hace "run" en "|" (valla), se variará la pista por "/".
+      - La función retornará un Boolean que indique si ha superado la carrera.
+      Para ello tiene que realizar la opción correcta en cada tramo de la pista.
+    `,
     ejemplo: "carrera(10) // simulación de saltos",
-    codigo: "",
+    codigo: dedent`
+      function carrera(tramos, pista) {
+        let correcto = true;
+        for (let i = 0; i < tramos.length; i++) {
+          if (tramos[i] === "run") {
+            if (pista[i] === "|") {
+              pista = pista.replace("|", "/");
+              correcto = false;
+            }
+          } else if (tramos[i] === "jump") {
+            if (pista[i] === "_") {
+              pista = pista.replace("_", "x");
+              correcto = false;
+            }
+          }
+        }
+        console.log(pista);
+        return correcto;
+      }
+    `,
     tasaExito: 80,
   },
   {
@@ -427,10 +514,35 @@ function codigoMorseInverso(code) {
     titulo: "TRES EN RAYA",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Implementa el juego de tres en raya (Tic-Tac-Toe) para dos jugadores.",
+    descripcion: dedent`
+      Implementa el juego de tres en raya (Tic-Tac-Toe) para dos jugadores.
+    `,
     ejemplo: "tresEnRaya(tablero) // ganador o empate",
-    codigo: "",
+    codigo: dedent`
+      function analizarMatriz(matriz) {
+        let n = matriz.length;
+        for (let i = 0; i < n; i++) {
+          if (
+            matriz[i][0] !== null &&
+            matriz[i][0] === matriz[i][1] &&
+            matriz[i][1] === matriz[i][2]
+          ) return matriz[0][1] + " ganó";
+        }
+
+        for (let j = 0; j < n; j++) {
+          if(
+            matriz[0][j] !== null &&
+            matriz[0][j] === matriz[1][j] &&
+      matriz[1][j] === matriz[2][j]
+          ) return matriz[1][0] + " ganó";
+        }
+
+        if(matriz[0][0] === matriz[1][1] && matriz[1][1] === matriz[2][2]) return matriz[1][1] + " ganó";
+        if(matriz[0][2] === matriz[1][1] && matriz[1][1] === matriz[2][0]) return matriz[1][1] + " ganó";
+
+        return "Empate";
+      }
+    `,
     tasaExito: 85,
   },
   {
@@ -439,10 +551,17 @@ function codigoMorseInverso(code) {
     titulo: "CONVERSOR TIEMPO",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Convierte un tiempo dado en segundos a horas, minutos y segundos.",
+    descripcion: dedent`
+      Crea una función que reciba días, horas, minutos y segundos (como enteros) y retorne su resultado en milisegundos..
+    `,
     ejemplo: "convertirTiempo(3661) // '1:01:01'",
-    codigo: "",
+    codigo: `
+      function segundos(dias, horas, minutos, segundos) {
+        let ms = (dias * 86400000) + (horas * 3600000) + (minutos * 60000) + (segundos * 1000)
+
+        return "Hay un total de " + ms + " ms"
+      }
+    `,
     tasaExito: 94,
   },
   {
@@ -451,10 +570,28 @@ function codigoMorseInverso(code) {
     titulo: "PARANDO EL TIEMPO",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Simula una función que 'pausa' el tiempo durante un intervalo dado.",
-    ejemplo: "pausa(2000) // espera 2 segundos",
-    codigo: "",
+    descripcion: dedent`
+      Crea una funcion que sume 2 números y retorne su resultado pasado unos segundos.
+      - Recibirá por parámetros 2 números a sumar y los segundos que debe tardar en finalizar su ejecución.
+      - Si el lenguaje lo soporta, deberá retornar el resultado de forma asíncrona, es decir, sin detener la ejecución del programa principal. 
+      - Se podría ejecutar varias veces al mismo tiempo.
+    `,
+    ejemplo: "parandoElTiempo(5, 7, 2) // 10",
+    codigo: `
+      function parandoElTiempo(num, num2, seg) {
+        return new Promise((res) => {
+          console.log("Sumando...");
+          setTimeout(() => {
+            const suma = num + num2;
+            res(suma);
+          }, seg * 1000);
+        });
+      }
+
+      parandoElTiempo(5, 7).then((suma) => {
+        console.log("La suma es:", suma);
+      });
+    `,
     tasaExito: 88,
   },
   {
@@ -463,10 +600,89 @@ function codigoMorseInverso(code) {
     titulo: "CALCULADORA .TXT",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Lee operaciones matemáticas desde un archivo de texto y las ejecuta.",
+    descripcion: dedent`
+      Lee el fichero "Calculator.txt" incluido en el proyecto, calcula su resultado e imprímelo.
+      - El .txt se corresponde con las entradas de una calculadora.
+      - Cada línea tendrá un número o una operación representada por un símbolo (alternando ambos).
+      - Soporta números enteros y decimales.
+      - Soporta las operaciones suma "+", resta "-", multiplicación "*" y división "/".
+      - El resultado se muestra al finalizar la lectura de la última línea (si el .txt es correcto).
+      - Si el formato del .txt no es correcto, se indicará que no se han podido resolver las operaciones.
+    `,
     ejemplo: "calcularDesdeArchivo('ops.txt') // resultados",
-    codigo: "",
+    codigo: dedent`
+      const fs = require("fs");
+
+      function calculadoraTxT() {
+        try {
+          const contenido = fs.readFileSync("Calculator.txt", "utf-8");
+
+          const lineas = contenido
+            .trim()
+            .split("\n")
+            .map((linea) => linea.trim())
+            .filter((linea) => linea !== "");
+
+          if (lineas.length === 0) {
+            console.log("El archivo está vacío o no tiene operaciones válidas");
+            return;
+          }
+
+          if (isNaN(Number(lineas[0]))) {
+            console.log("La primera linea debe ser un numero");
+            return;
+          }
+
+          let resultado = parseFloat(lineas[0]);
+
+          for (let i = 1; i < lineas.length; i += 2) {
+            const operacion = lineas[i];
+            const sigNumStr = lineas[i + 1];
+
+            if (!sigNumStr) {
+              console.log("Falta un número despúes de la operación", operacion);
+              return;
+            }
+
+            const numero = parseFloat(sigNumStr);
+
+            if (isNaN(numero)) {
+              console.log(
+                "Formato incorrecto, se esperaba un número, se encontró: ",
+                sigNumStr
+              );
+              return;
+            }
+
+            switch (operacion) {
+              case "+":
+                resultado += numero;
+                break;
+              case "-":
+                resultado -= numero;
+                break;
+              case "*":
+                resultado *= numero;
+                break;
+              case "/":
+                if (numero === 0) {
+                  console.log("No se puede dividir entre 0");
+                  return;
+                }
+                resultado /= numero;
+                break;
+              default:
+                console.log("Operacion no soportada", operacion);
+                return;
+            }
+          }
+          console.log("El resultado es: ", resultado);
+        } catch (error) {
+          console.log("No se han podido resolver las operaciones.");
+          console.log("Error:", error.message);
+        }
+      }
+    `,
     tasaExito: 86,
   },
   {
@@ -475,8 +691,9 @@ function codigoMorseInverso(code) {
     titulo: "CONJUNTOS",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Realiza operaciones básicas con conjuntos como unión, intersección y diferencia.",
+    descripcion: dedent`
+      Realiza operaciones básicas con conjuntos como unión, intersección y diferencia.
+    `,
     ejemplo: "union({1,2}, {2,3}) // {1,2,3}",
     codigo: "",
     tasaExito: 91,
@@ -487,7 +704,9 @@ function codigoMorseInverso(code) {
     titulo: "MÁXIMO COMÚN DIVISOR Y MÍNIMO COMÚN MÚLTIPLO",
     nivel: 1,
     dificultad: "fácil",
-    descripcion: "Calcula el MCD y el MCM de dos números enteros.",
+    descripcion: dedent`
+      Calcula el MCD y el MCM de dos números enteros.
+    `,
     ejemplo: "mcd(12, 18) // 6",
     codigo: "",
     tasaExito: 92,
@@ -498,8 +717,9 @@ function codigoMorseInverso(code) {
     titulo: "ITERATION MASTER",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Practica el uso de bucles (for, while) para resolver problemas iterativos.",
+    descripcion: dedent`
+      Practica el uso de bucles (for, while) para resolver problemas iterativos.
+    `,
     ejemplo: "iterar(5) // suma 1+2+3+4+5",
     codigo: "",
     tasaExito: 89,
@@ -510,8 +730,9 @@ function codigoMorseInverso(code) {
     titulo: "PIEDRA, PAPEL, TIJERA",
     nivel: 1,
     dificultad: "fácil",
-    descripcion:
-      "Implementa el juego clásico de piedra, papel o tijera contra la computadora.",
+    descripcion: dedent`
+      Implementa el juego clásico de piedra, papel o tijera contra la computadora.
+    `,
     ejemplo: "jugar('piedra') // 'empate' o ganador",
     codigo: "",
     tasaExito: 93,
@@ -522,8 +743,9 @@ function codigoMorseInverso(code) {
     titulo: "CUADRADO Y TRIÁNGULO 2D",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Dibuja un cuadrado y un triángulo en un plano 2D usando caracteres o gráficos simples.",
+    descripcion: dedent`
+      Dibuja un cuadrado y un triángulo en un plano 2D usando caracteres o gráficos simples.
+    `,
     ejemplo: "dibujarCuadrado(4) // ****\n****",
     codigo: "",
     tasaExito: 87,
@@ -534,8 +756,9 @@ function codigoMorseInverso(code) {
     titulo: "VECTORES ORTOGONALES",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Determina si dos vectores son ortogonales calculando su producto escalar.",
+    descripcion: dedent`
+      Determina si dos vectores son ortogonales calculando su producto escalar.
+    `,
     ejemplo: "ortogonales([1,0], [0,1]) // true",
     codigo: "",
     tasaExito: 85,
@@ -546,8 +769,9 @@ function codigoMorseInverso(code) {
     titulo: "MÁQUINA EXPENDEDORA",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Simula una máquina expendedora que recibe dinero y devuelve productos.",
+    descripcion: dedent`
+      Simula una máquina expendedora que recibe dinero y devuelve productos.
+    `,
     ejemplo: "comprar('agua', 1.5) // cambio 0.5",
     codigo: "",
     tasaExito: 90,
@@ -558,8 +782,9 @@ function codigoMorseInverso(code) {
     titulo: "ORDENA LA LISTA",
     nivel: 1,
     dificultad: "fácil",
-    descripcion:
-      "Ordena una lista de números utilizando un algoritmo de ordenamiento básico.",
+    descripcion: dedent`
+      Ordena una lista de números utilizando un algoritmo de ordenamiento básico.
+    `,
     ejemplo: "ordenar([3,1,2]) // [1,2,3]",
     codigo: "",
     tasaExito: 94,
@@ -570,8 +795,9 @@ function codigoMorseInverso(code) {
     titulo: "MARCO DE PALABRAS",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Crea un marco o borde alrededor de una palabra o frase usando caracteres.",
+    descripcion: dedent`
+      Crea un marco o borde alrededor de una palabra o frase usando caracteres.
+    `,
     ejemplo: "marco('Hola') // +----+\n|Hola|",
     codigo: "",
     tasaExito: 88,
@@ -582,8 +808,9 @@ function codigoMorseInverso(code) {
     titulo: "AÑOS BISIESTOS",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Determina si un año es bisiesto según las reglas del calendario gregoriano.",
+    descripcion: dedent`
+      Determina si un año es bisiesto según las reglas del calendario gregoriano.
+    `,
     ejemplo: "esBisiesto(2024) // true",
     codigo: "",
     tasaExito: 95,
@@ -594,8 +821,9 @@ function codigoMorseInverso(code) {
     titulo: "EL SEGUNDO",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Convierte un tiempo dado en segundos a su formato en horas, minutos y segundos.",
+    descripcion: dedent`
+      Convierte un tiempo dado en segundos a su formato en horas, minutos y segundos.
+    `,
     ejemplo: "formatoTiempo(3661) // '01:01:01'",
     codigo: "",
     tasaExito: 92,
@@ -606,8 +834,9 @@ function codigoMorseInverso(code) {
     titulo: "CICLO SEXAGENARIO CHINO",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Calcula el signo zodiacal chino correspondiente a un año dado.",
+    descripcion: dedent`
+      Calcula el signo zodiacal chino correspondiente a un año dado.
+    `,
     ejemplo: "signoChino(2024) // 'Dragón'",
     codigo: "",
     tasaExito: 86,
@@ -618,8 +847,9 @@ function codigoMorseInverso(code) {
     titulo: "LOS NÚMEROS PERDIDOS",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Encuentra números faltantes en una secuencia aparentemente continua.",
+    descripcion: dedent`
+      Encuentra números faltantes en una secuencia aparentemente continua.
+    `,
     ejemplo: "perdidos([1,2,4,5]) // 3",
     codigo: "",
     tasaExito: 89,
@@ -630,8 +860,9 @@ function codigoMorseInverso(code) {
     titulo: "BATALLA POKÉMON",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Simula un combate entre dos Pokémon con estadísticas y ataques.",
+    descripcion: dedent`
+      Simula un combate entre dos Pokémon con estadísticas y ataques.
+    `,
     ejemplo: "batalla(pikachu, charmander) // ganador",
     codigo: "",
     tasaExito: 83,
@@ -642,8 +873,9 @@ function codigoMorseInverso(code) {
     titulo: "LOS ANILLOS DE PODER",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Genera o analiza una estructura relacionada con los anillos de poder de la saga.",
+    descripcion: dedent`
+      Genera o analiza una estructura relacionada con los anillos de poder de la saga.
+    `,
     ejemplo: "anillos(3) // lista de anillos",
     codigo: "",
     tasaExito: 81,
@@ -654,8 +886,9 @@ function codigoMorseInverso(code) {
     titulo: 'LOS LANZAMIENTOS DE "THE LEGEND OF ZELDA"',
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Lista o filtra los lanzamientos de juegos de The Legend of Zelda por año o plataforma.",
+    descripcion: dedent`
+      Lista o filtra los lanzamientos de juegos de The Legend of Zelda por año o plataforma.
+    `,
     ejemplo: "lanzamientosZelda('NES') // lista de juegos",
     codigo: "",
     tasaExito: 87,
@@ -666,7 +899,9 @@ function codigoMorseInverso(code) {
     titulo: "BINARIO A DECIMAL",
     nivel: 2,
     dificultad: "medio",
-    descripcion: "Convierte un número binario a su equivalente en decimal.",
+    descripcion: dedent`
+      Convierte un número binario a su equivalente en decimal.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 90,
@@ -677,7 +912,9 @@ function codigoMorseInverso(code) {
     titulo: "TOP ALGORITMOS | QUICK SORT",
     nivel: 2,
     dificultad: "medio",
-    descripcion: "Implementa el algoritmo de ordenación Quick Sort.",
+    descripcion: dedent`
+      Implementa el algoritmo de ordenación Quick Sort.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 90,
@@ -688,7 +925,9 @@ function codigoMorseInverso(code) {
     titulo: "TRIÁNGULO DE PASCAL",
     nivel: 1,
     dificultad: "fácil",
-    descripcion: "Genera el triángulo de Pascal hasta una fila dada.",
+    descripcion: dedent`
+      Genera el triángulo de Pascal hasta una fila dada.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 95,
@@ -699,8 +938,9 @@ function codigoMorseInverso(code) {
     titulo: "LA LEY DE OHM",
     nivel: 1,
     dificultad: "fácil",
-    descripcion:
-      "Calcula la resistencia, voltaje o corriente usando la ley de Ohm.",
+    descripcion: dedent`
+      Calcula la resistencia, voltaje o corriente usando la ley de Ohm.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 95,
@@ -711,8 +951,9 @@ function codigoMorseInverso(code) {
     titulo: "CONVERSOR DE TEMPERATURA",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Convierte temperaturas entre diferentes escalas como Celsius, Fahrenheit y Kelvin.",
+    descripcion: dedent`
+      Convierte temperaturas entre diferentes escalas como Celsius, Fahrenheit y Kelvin.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 90,
@@ -723,7 +964,9 @@ function codigoMorseInverso(code) {
     titulo: "TRUCO O TRATO",
     nivel: 1,
     dificultad: "fácil",
-    descripcion: "Simula un juego de truco o trato con decisiones aleatorias.",
+    descripcion: dedent`
+      Simula un juego de truco o trato con decisiones aleatorias.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 95,
@@ -734,8 +977,9 @@ function codigoMorseInverso(code) {
     titulo: "BUMERANES",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Detecta si una cadena es un bumerán (se lee igual al revés en partes).",
+    descripcion: dedent`
+      Detecta si una cadena es un bumerán (se lee igual al revés en partes).
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 90,
@@ -746,8 +990,9 @@ function codigoMorseInverso(code) {
     titulo: "CONTENEDOR DE AGUA",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Encuentra la cantidad máxima de agua que puede contener un contenedor formado por barras de alturas variables.",
+    descripcion: dedent`
+      Encuentra la cantidad máxima de agua que puede contener un contenedor formado por barras de alturas variables.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 90,
@@ -758,8 +1003,9 @@ function codigoMorseInverso(code) {
     titulo: "¿DÓNDE ESTÁ EL ROBOT?",
     nivel: 1,
     dificultad: "fácil",
-    descripcion:
-      "Simula el movimiento de un robot en una cuadrícula y determina su posición final.",
+    descripcion: dedent`
+      Simula el movimiento de un robot en una cuadrícula y determina su posición final.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 95,
@@ -770,7 +1016,9 @@ function codigoMorseInverso(code) {
     titulo: "VOCAL MÁS COMÚN",
     nivel: 1,
     dificultad: "fácil",
-    descripcion: "Encuentra la vocal que más se repite en una cadena de texto.",
+    descripcion: dedent`
+      Encuentra la vocal que más se repite en una cadena de texto.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 95,
@@ -781,8 +1029,9 @@ function codigoMorseInverso(code) {
     titulo: "EL CALENDARIO DE ADEVIENTO 2022",
     nivel: 1,
     dificultad: "fácil",
-    descripcion:
-      "Genera un calendario de adviento con puertas numeradas del 1 al 24.",
+    descripcion: dedent`
+      Genera un calendario de adviento con puertas numeradas del 1 al 24.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 95,
@@ -793,8 +1042,9 @@ function codigoMorseInverso(code) {
     titulo: "EL DETECTOR DE HANDLES",
     nivel: 1,
     dificultad: "fácil",
-    descripcion:
-      "Detecta si una cadena contiene un handle válido (por ejemplo, @usuario).",
+    descripcion: dedent`
+      Detecta si una cadena contiene un handle válido (por ejemplo, @usuario).
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 95,
@@ -805,8 +1055,9 @@ function codigoMorseInverso(code) {
     titulo: "LA ENCRIPTACIÓN DE KARACA",
     nivel: 1,
     dificultad: "fácil",
-    descripcion:
-      "Implementa un cifrado simple basado en sustitución de caracteres.",
+    descripcion: dedent`
+      Implementa un cifrado simple basado en sustitución de caracteres.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 95,
@@ -817,8 +1068,9 @@ function codigoMorseInverso(code) {
     titulo: "EL RETO RANDOM",
     nivel: 1,
     dificultad: "fácil",
-    descripcion:
-      "Genera un número aleatorio dentro de un rango y realiza una operación básica con él.",
+    descripcion: dedent`
+      Genera un número aleatorio dentro de un rango y realiza una operación básica con él.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 95,
@@ -829,8 +1081,9 @@ function codigoMorseInverso(code) {
     titulo: 'EL FAMOSO "FIZZ BUZZ" (v2)',
     nivel: 1,
     dificultad: "fácil",
-    descripcion:
-      "Imprime números del 1 al 100, reemplazando múltiplos de 3 y 5 por 'Fizz' y 'Buzz'.",
+    descripcion: dedent`
+      Imprime números del 1 al 100, reemplazando múltiplos de 3 y 5 por 'Fizz' y 'Buzz'.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 95,
@@ -841,8 +1094,9 @@ function codigoMorseInverso(code) {
     titulo: 'EL "LENGUAJE HACKER"',
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Convierte texto normal a un estilo 'hacker' usando caracteres especiales o patrones.",
+    descripcion: dedent`
+      Convierte texto normal a un estilo 'hacker' usando caracteres especiales o patrones.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 90,
@@ -853,8 +1107,9 @@ function codigoMorseInverso(code) {
     titulo: "EL PARTIDO DE TENIS",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Simula el conteo de un partido de tenis con lógica de 15, 30, 40 y ventaja.",
+    descripcion: dedent`
+      Simula el conteo de un partido de tenis con lógica de 15, 30, 40 y ventaja.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 90,
@@ -865,8 +1120,9 @@ function codigoMorseInverso(code) {
     titulo: "EL GENERADOR DE CONTRASEÑAS",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Genera una contraseña aleatoria con longitud y caracteres personalizados.",
+    descripcion: dedent`
+      Genera una contraseña aleatoria con longitud y caracteres personalizados.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 90,
@@ -877,7 +1133,9 @@ function codigoMorseInverso(code) {
     titulo: "PRIMO, FIBONACCI Y PAR",
     nivel: 1,
     dificultad: "fácil",
-    descripcion: "Clasifica un número como primo, fibonacci o par.",
+    descripcion: dedent`
+      Clasifica un número como primo, fibonacci o par.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 95,
@@ -888,8 +1146,9 @@ function codigoMorseInverso(code) {
     titulo: "¡HOLA MUNDO!",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Imprime 'Hola, Mundo!' con variaciones o en diferentes idiomas.",
+    descripcion: dedent`
+      Imprime 'Hola, Mundo!' con variaciones o en diferentes idiomas.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 90,
@@ -900,8 +1159,9 @@ function codigoMorseInverso(code) {
     titulo: "PIEDRA, PAPEL, TIJERA, LAGARTO, SPOCK",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Implementa el juego extendido de Piedra, Papel, Tijera con nuevas reglas.",
+    descripcion: dedent`
+      Implementa el juego extendido de Piedra, Papel, Tijera con nuevas reglas.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 90,
@@ -912,8 +1172,9 @@ function codigoMorseInverso(code) {
     titulo: "EL SOMBRERO SELECCIONADOR",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Asigna una casa de Hogwarts según características del usuario.",
+    descripcion: dedent`
+      Asigna una casa de Hogwarts según características del usuario.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 90,
@@ -924,8 +1185,9 @@ function codigoMorseInverso(code) {
     titulo: "EL GENERADOR PSEUDOALEATORIO",
     nivel: 1,
     dificultad: "fácil",
-    descripcion:
-      "Genera una secuencia de números pseudoaleatorios usando un algoritmo simple.",
+    descripcion: dedent`
+      Genera una secuencia de números pseudoaleatorios usando un algoritmo simple.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 95,
@@ -936,8 +1198,9 @@ function codigoMorseInverso(code) {
     titulo: "HETEROGRAMA, ISOGRAMA Y PANGRAMA",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Clasifica un texto según si tiene todas letras únicas, repite letras o es pangrama.",
+    descripcion: dedent`
+      Clasifica un texto según si tiene todas letras únicas, repite letras o es pangrama.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 90,
@@ -948,7 +1211,9 @@ function codigoMorseInverso(code) {
     titulo: "LA API (APPLICATION PROGRAMMING INTERFACE)",
     nivel: 1,
     dificultad: "fácil",
-    descripcion: "Simula el uso de una API consumiendo datos ficticios.",
+    descripcion: dedent`
+      Simula el uso de una API consumiendo datos ficticios.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 95,
@@ -959,7 +1224,9 @@ function codigoMorseInverso(code) {
     titulo: "PARÁMETROS URL",
     nivel: 1,
     dificultad: "fácil",
-    descripcion: "Extrae parámetros de una URL codificada.",
+    descripcion: dedent`
+      Extrae parámetros de una URL codificada.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 95,
@@ -970,7 +1237,9 @@ function codigoMorseInverso(code) {
     titulo: "VIERNES 13",
     nivel: 1,
     dificultad: "fácil",
-    descripcion: "Cuenta cuántos días del año son viernes 13 en un año dado.",
+    descripcion: dedent`
+      Cuenta cuántos días del año son viernes 13 en un año dado.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 95,
@@ -981,8 +1250,9 @@ function codigoMorseInverso(code) {
     titulo: "ADIVINA LA PALABRA",
     nivel: 1,
     dificultad: "fácil",
-    descripcion:
-      "Simula un juego de adivinar una palabra con pistas y intentos limitados.",
+    descripcion: dedent`
+      Simula un juego de adivinar una palabra con pistas y intentos limitados.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 95,
@@ -993,7 +1263,9 @@ function codigoMorseInverso(code) {
     titulo: "OCTAL Y HEXADECIMAL",
     nivel: 1,
     dificultad: "fácil",
-    descripcion: "Convierte números entre bases octal, hexadecimal y decimal.",
+    descripcion: dedent`
+      Convierte números entre bases octal, hexadecimal y decimal.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 95,
@@ -1004,8 +1276,9 @@ function codigoMorseInverso(code) {
     titulo: "AUREBESH",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Convierte texto a un alfabeto ficticio como el de Star Wars (Aurebesh).",
+    descripcion: dedent`
+      Convierte texto a un alfabeto ficticio como el de Star Wars (Aurebesh).
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 90,
@@ -1016,7 +1289,9 @@ function codigoMorseInverso(code) {
     titulo: "LA ESCALERA",
     nivel: 3,
     dificultad: "difícil",
-    descripcion: "Genera una escalera de caracteres con patrones específicos.",
+    descripcion: dedent`
+      Genera una escalera de caracteres con patrones específicos.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 85,
@@ -1027,8 +1302,9 @@ function codigoMorseInverso(code) {
     titulo: "GIT Y GITHUB",
     nivel: 3,
     dificultad: "difícil",
-    descripcion:
-      "Se trata de resolver un ejercicio relacionado con el uso de Git y GitHub, probablemente involucrando comandos avanzados o flujos de trabajo típicos de control de versiones.",
+    descripcion: dedent`
+      Se trata de resolver un ejercicio relacionado con el uso de Git y GitHub, probablemente involucrando comandos avanzados o flujos de trabajo típicos de control de versiones.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 85,
@@ -1039,8 +1315,9 @@ function codigoMorseInverso(code) {
     titulo: "WEB SCRAPING",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "El ejercicio consiste en extraer información de una página web utilizando técnicas de web scraping.",
+    descripcion: dedent`
+      El ejercicio consiste en extraer información de una página web utilizando técnicas de web scraping.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 90,
@@ -1051,8 +1328,9 @@ function codigoMorseInverso(code) {
     titulo: "ANÁLISIS DE TEXTO",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Se debe realizar un análisis estadístico o estructural sobre un texto dado, como contar frecuencias o identificar patrones.",
+    descripcion: dedent`
+      Se debe realizar un análisis estadístico o estructural sobre un texto dado, como contar frecuencias o identificar patrones.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 88,
@@ -1063,8 +1341,9 @@ function codigoMorseInverso(code) {
     titulo: "LA TRIFUERZA",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "El reto implica simular o resolver un problema relacionado con la Trifuerza de Zelda, posiblemente manipulando combinaciones o estructuras lógicas.",
+    descripcion: dedent`
+      El reto implica simular o resolver un problema relacionado con la Trifuerza de Zelda, posiblemente manipulando combinaciones o estructuras lógicas.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 87,
@@ -1075,8 +1354,9 @@ function codigoMorseInverso(code) {
     titulo: "NÚMEROS PRIMOS GEMELOS",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Se pide identificar o generar números primos gemelos, es decir, pares de primos que difieren en 2 unidades.",
+    descripcion: dedent`
+      Se pide identificar o generar números primos gemelos, es decir, pares de primos que difieren en 2 unidades.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 92,
@@ -1087,8 +1367,9 @@ function codigoMorseInverso(code) {
     titulo: "LA ESPIRAL",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "El ejercicio requiere generar o trabajar con una matriz o secuencia que forme una espiral numérica.",
+    descripcion: dedent`
+      El ejercicio requiere generar o trabajar con una matriz o secuencia que forme una espiral numérica.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 89,
@@ -1099,8 +1380,9 @@ function codigoMorseInverso(code) {
     titulo: "LA BASE DE DATOS",
     nivel: 1,
     dificultad: "fácil",
-    descripcion:
-      "Se debe simular o interactuar con una base de datos básica, posiblemente realizando consultas o inserciones.",
+    descripcion: dedent`
+      Se debe simular o interactuar con una base de datos básica, posiblemente realizando consultas o inserciones.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 95,
@@ -1111,8 +1393,9 @@ function codigoMorseInverso(code) {
     titulo: "CIFRADO CÉSAR",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "El reto consiste en implementar el cifrado de César, un método de encriptación por desplazamiento de letras.",
+    descripcion: dedent`
+      El reto consiste en implementar el cifrado de César, un método de encriptación por desplazamiento de letras.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 93,
@@ -1123,8 +1406,9 @@ function codigoMorseInverso(code) {
     titulo: "EL CÓDIGO KONAMI",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Se debe detectar una secuencia específica de teclas, como el famoso código Konami, en una entrada.",
+    descripcion: dedent`
+      Se debe detectar una secuencia específica de teclas, como el famoso código Konami, en una entrada.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 90,
@@ -1135,8 +1419,9 @@ function codigoMorseInverso(code) {
     titulo: "TESTING",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "El ejercicio implica escribir pruebas unitarias o validar el comportamiento de un programa mediante testing.",
+    descripcion: dedent`
+      El ejercicio implica escribir pruebas unitarias o validar el comportamiento de un programa mediante testing.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 88,
@@ -1147,8 +1432,9 @@ function codigoMorseInverso(code) {
     titulo: "CUENTA ATRÁS",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Se debe simular una cuenta regresiva, posiblemente con formato de tiempo o eventos.",
+    descripcion: dedent`
+      Se debe simular una cuenta regresiva, posiblemente con formato de tiempo o eventos.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 91,
@@ -1159,8 +1445,9 @@ function codigoMorseInverso(code) {
     titulo: "EXPRESIÓN MATEMÁTICA",
     nivel: 1,
     dificultad: "fácil",
-    descripcion:
-      "El reto consiste en evaluar o validar una expresión matemática ingresada como cadena.",
+    descripcion: dedent`
+      El reto consiste en evaluar o validar una expresión matemática ingresada como cadena.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 96,
@@ -1171,8 +1458,9 @@ function codigoMorseInverso(code) {
     titulo: "EL CARÁCTER INFILTRADO",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Se debe identificar un carácter que aparece de forma inesperada en una cadena, posiblemente un intruso.",
+    descripcion: dedent`
+      Se debe identificar un carácter que aparece de forma inesperada en una cadena, posiblemente un intruso.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 89,
@@ -1183,8 +1471,9 @@ function codigoMorseInverso(code) {
     titulo: "EL TECLADO T9",
     nivel: 1,
     dificultad: "fácil",
-    descripcion:
-      "El ejercicio requiere simular el funcionamiento de un teclado T9 para convertir pulsaciones en texto.",
+    descripcion: dedent`
+      El ejercicio requiere simular el funcionamiento de un teclado T9 para convertir pulsaciones en texto.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 94,
@@ -1195,8 +1484,9 @@ function codigoMorseInverso(code) {
     titulo: "EL ÁBACO",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Se debe modelar o simular el funcionamiento de un ábaco para realizar operaciones aritméticas.",
+    descripcion: dedent`
+      Se debe modelar o simular el funcionamiento de un ábaco para realizar operaciones aritméticas.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 87,
@@ -1207,8 +1497,9 @@ function codigoMorseInverso(code) {
     titulo: "LA COLUMNA DE EXCEL",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "El reto implica convertir un número en la notación de columna de Excel (A, B, ..., Z, AA, AB, ...).",
+    descripcion: dedent`
+      El reto implica convertir un número en la notación de columna de Excel (A, B, ..., Z, AA, AB, ...).
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 90,
@@ -1219,8 +1510,9 @@ function codigoMorseInverso(code) {
     titulo: "TETRIS",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Se debe implementar una simulación básica del juego Tetris, manejando piezas y colisiones.",
+    descripcion: dedent`
+      Se debe implementar una simulación básica del juego Tetris, manejando piezas y colisiones.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 85,
@@ -1231,8 +1523,9 @@ function codigoMorseInverso(code) {
     titulo: "TXT",
     nivel: 1,
     dificultad: "fácil",
-    descripcion:
-      "El ejercicio consiste en leer o procesar un archivo de texto plano (TXT) para extraer información.",
+    descripcion: dedent`
+      El ejercicio consiste en leer o procesar un archivo de texto plano (TXT) para extraer información.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 97,
@@ -1243,8 +1536,9 @@ function codigoMorseInverso(code) {
     titulo: "PRIMEROS PASOS",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Se debe realizar una introducción práctica a conceptos básicos de programación o manejo de datos.",
+    descripcion: dedent`
+      Se debe realizar una introducción práctica a conceptos básicos de programación o manejo de datos.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 92,
@@ -1255,8 +1549,9 @@ function codigoMorseInverso(code) {
     titulo: "PERMUTACIONES",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "El reto requiere generar todas las permutaciones posibles de un conjunto de elementos.",
+    descripcion: dedent`
+      El reto requiere generar todas las permutaciones posibles de un conjunto de elementos.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 88,
@@ -1267,8 +1562,9 @@ function codigoMorseInverso(code) {
     titulo: "COLORES HEX Y RGB",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Se debe convertir entre códigos de color en formato hexadecimal y valores RGB.",
+    descripcion: dedent`
+      Se debe convertir entre códigos de color en formato hexadecimal y valores RGB.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 91,
@@ -1279,8 +1575,9 @@ function codigoMorseInverso(code) {
     titulo: "LAS SUMAS",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "El ejercicio implica resolver o generar problemas de sumas, posiblemente en un formato específico.",
+    descripcion: dedent`
+      El ejercicio implica resolver o generar problemas de sumas, posiblemente en un formato específico.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 89,
@@ -1291,8 +1588,9 @@ function codigoMorseInverso(code) {
     titulo: "TRIPLES PITAGÓRICOS",
     nivel: 1,
     dificultad: "fácil",
-    descripcion:
-      "Se debe encontrar o validar triples de números que cumplan el teorema de Pitágoras.",
+    descripcion: dedent`
+      Se debe encontrar o validar triples de números que cumplan el teorema de Pitágoras.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 95,
@@ -1303,8 +1601,9 @@ function codigoMorseInverso(code) {
     titulo: "TABLA DE MULTIPLICAR",
     nivel: 3,
     dificultad: "difícil",
-    descripcion:
-      "El reto requiere generar una tabla de multiplicar completa, posiblemente con formato avanzado o condiciones.",
+    descripcion: dedent`
+      El reto requiere generar una tabla de multiplicar completa, posiblemente con formato avanzado o condiciones.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 83,
@@ -1315,8 +1614,9 @@ function codigoMorseInverso(code) {
     titulo: "LA CASA ENCANTADA",
     nivel: 3,
     dificultad: "difícil",
-    descripcion:
-      "Se debe simular una casa encantada, posiblemente resolviendo un puzzle o navegación lógica.",
+    descripcion: dedent`
+      Se debe simular una casa encantada, posiblemente resolviendo un puzzle o navegación lógica.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 82,
@@ -1327,8 +1627,9 @@ function codigoMorseInverso(code) {
     titulo: "PUNTO DE ENCUENTRO",
     nivel: 1,
     dificultad: "fácil",
-    descripcion:
-      "El ejercicio consiste en determinar un punto de encuentro basado en condiciones dadas.",
+    descripcion: dedent`
+      El ejercicio consiste en determinar un punto de encuentro basado en condiciones dadas.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 96,
@@ -1339,8 +1640,9 @@ function codigoMorseInverso(code) {
     titulo: "SIMULADOR DE CLIMA",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Se debe crear un simulador simple que genere datos climáticos o prediga condiciones.",
+    descripcion: dedent`
+      Se debe crear un simulador simple que genere datos climáticos o prediga condiciones.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 90,
@@ -1351,8 +1653,9 @@ function codigoMorseInverso(code) {
     titulo: "ADIVINANZAS MATEMÁTICAS",
     nivel: 1,
     dificultad: "fácil",
-    descripcion:
-      "El reto implica resolver o generar adivinanzas basadas en conceptos matemáticos.",
+    descripcion: dedent`
+      El reto implica resolver o generar adivinanzas basadas en conceptos matemáticos.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 94,
@@ -1363,8 +1666,9 @@ function codigoMorseInverso(code) {
     titulo: "EL CALENDARIO DE ADEVIENTO 2023",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "Se debe implementar un calendario de Adviento que muestre información día a día en diciembre.",
+    descripcion: dedent`
+      Se debe implementar un calendario de Adviento que muestre información día a día en diciembre.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 88,
@@ -1375,8 +1679,9 @@ function codigoMorseInverso(code) {
     titulo: "LA CARRERA DE COCHES",
     nivel: 1,
     dificultad: "fácil",
-    descripcion:
-      "El ejercicio simula una carrera entre coches, determinando ganadores o posiciones.",
+    descripcion: dedent`
+      El ejercicio simula una carrera entre coches, determinando ganadores o posiciones.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 93,
@@ -1387,8 +1692,9 @@ function codigoMorseInverso(code) {
     titulo: "LA PALABRA DE 100 PUNTOS",
     nivel: 3,
     dificultad: "difícil",
-    descripcion:
-      "Se debe encontrar o construir una palabra que alcance 100 puntos según reglas de puntuación.",
+    descripcion: dedent`
+      Se debe encontrar o construir una palabra que alcance 100 puntos según reglas de puntuación.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 84,
@@ -1399,8 +1705,9 @@ function codigoMorseInverso(code) {
     titulo: "EL RANKING",
     nivel: 2,
     dificultad: "medio",
-    descripcion:
-      "El reto consiste en generar o gestionar un ranking basado en puntuaciones o criterios específicos.",
+    descripcion: dedent`
+      El reto consiste en generar o gestionar un ranking basado en puntuaciones o criterios específicos.
+    `,
     ejemplo: "Ejemplo no disponible",
     codigo: "",
     tasaExito: 89,
