@@ -16,6 +16,7 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "astro": "^5.16.4",
+    "dedent": "^1.7.0",
     "eslint-plugin-import": "^2.32.0",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
