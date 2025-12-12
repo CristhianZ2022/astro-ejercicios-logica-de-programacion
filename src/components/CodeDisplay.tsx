@@ -3,10 +3,9 @@ import { CopyText, IconChevronUp } from "src/icons/icons";
 
 interface CodeDisplayProps {
   codigo: string;
-  descripcion: string;
 }
 
-export default function CodeDisplay({ codigo, descripcion }: CodeDisplayProps) {
+export default function CodeDisplay({ codigo }: CodeDisplayProps) {
   const [visible, setVisible] = useState(false);
   const [copied, setCopied] = useState(false);
 
