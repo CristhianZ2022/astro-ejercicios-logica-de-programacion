@@ -692,10 +692,24 @@ export const ejercicios: Ejercicio[] = [
     nivel: 2,
     dificultad: "medio",
     descripcion: dedent`
-      Realiza operaciones básicas con conjuntos como unión, intersección y diferencia.
+      Crea una función que reciba dos array, un booleano y retorne un array.
+      - Si el booleano es verdadero buscará y retornará los elementos comunes de los dos array.
+      - Si el booleano es falso buscará y retornará los elementos no comunes de los dos array.
+      - No se pueden utilizar operaciones del lenguaje que lo resuelvan directamente.
     `,
     ejemplo: "union({1,2}, {2,3}) // {1,2,3}",
-    codigo: "",
+    codigo: dedent`
+      function conjuntos(toArray, toArray2, toBoolean) {
+        if (toBoolean) {
+          const comunes = toArray.filter((elemento) => toArray2.includes(elemento));
+          return ("Los elementos comunes son " + comunes);
+
+        } else {
+          const noComunes1 = toArray.filter((elemento) => !toArray2.includes(elemento)).concat(toArray2.filter((elemento) => !toArray.includes(elemento)));
+          return ("Los elementos no comunes son " + noComunes1);
+        }
+      }
+    `,
     tasaExito: 91,
   },
   {
@@ -708,7 +722,27 @@ export const ejercicios: Ejercicio[] = [
       Calcula el MCD y el MCM de dos números enteros.
     `,
     ejemplo: "mcd(12, 18) // 6",
-    codigo: "",
+    codigo: `
+      function MCD(a, b) {
+        while (b !== 0) {
+          let residuo = a % b;
+          a = b;
+          b = residuo;
+        }
+        return a;
+      }
+
+      function MCM(a, b){
+        let multipoA = a;
+        let i = 1;
+
+        while (true) {
+          if(multipoA % b === 0) return ("El Mínimo común múltiplo es ", multipoA)
+          i++;
+          multipoA = a * i;
+        }
+      }
+    `,
     tasaExito: 92,
   },
   {
@@ -718,10 +752,33 @@ export const ejercicios: Ejercicio[] = [
     nivel: 2,
     dificultad: "medio",
     descripcion: dedent`
-      Practica el uso de bucles (for, while) para resolver problemas iterativos.
+      Quiero contar del 1 al 100 de uno en uno (imprimiendo cada uno).
+      ¿De cuántas maneras eres capaz de hacerlo?
+      Crea el código para cada una de ellas.
     `,
     ejemplo: "iterar(5) // suma 1+2+3+4+5",
-    codigo: "",
+    codigo: dedent`
+      function iteracionMaster() {
+        let iWhile = 1;
+        let idoWhile = 1;
+
+        for (let i = 1; i <= 100; i++) console.log("i", i);
+
+        while (iWhile <= 100) {
+          console.log("iWhile", iWhile);
+          iWhile++;
+        }
+
+        do {
+          console.log("idoWhile", idoWhile);
+          idoWhile++;
+        } while (idoWhile <= 100);
+
+        Array(100)
+          .fill(0)
+          .forEach((_, i) => console.log(i + 1));
+      };
+    `,
     tasaExito: 89,
   },
   {
