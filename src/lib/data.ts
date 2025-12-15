@@ -804,7 +804,54 @@ export const ejercicios: Ejercicio[] = [
       Dibuja un cuadrado y un triángulo en un plano 2D usando caracteres o gráficos simples.
     `,
     ejemplo: "dibujarCuadrado(4) // ****\n****",
-    codigo: "",
+    codigo: dedent`
+      function dibujarFigura(tipo, tamaño) {
+        if (tamaño < 2) {
+          console.log("El tamaño debe ser mínimo 2 para dibujar bordes.");
+          return;
+        }
+
+        tipo = tipo.toLowerCase();
+
+        if (tipo === "cuadrado") {
+          for (let i = 0; i < tamaño; i++) {
+            let linea = "";
+
+            for (let j = 0; j < tamaño; j++) {
+              if (i === 0 || i === tamaño - 1 || j === 0 || j === tamaño - 1) {
+                linea += "* ";
+              } else {
+                linea += "  ";
+              }
+            }
+
+            console.log(linea);
+          }
+        }
+
+        else if (tipo === "triangulo") {
+          for (let i = 1; i <= tamaño; i++) {
+            let linea = "";
+            
+            linea += " ".repeat(tamaño - i);
+            
+            for (let j = 1; j <= i; j++) {
+              if (j >= 2 || j === i || i === tamaño) {
+                linea += "*";
+              } else {
+                linea += "*";
+              }
+            }
+
+            console.log(linea);
+          }
+        }
+
+        else {
+          console.log("Tipo no válido. Usa 'cuadrado' o 'triangulo'.");
+        }
+      }
+    `,
     tasaExito: 87,
   },
   {
