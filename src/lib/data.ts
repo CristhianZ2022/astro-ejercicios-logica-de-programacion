@@ -788,10 +788,37 @@ export const ejercicios: Ejercicio[] = [
     nivel: 1,
     dificultad: "fácil",
     descripcion: dedent`
-      Implementa el juego clásico de piedra, papel o tijera contra la computadora.
+      Crea un programa que calcule quien gana más partidas al piedra, papel, tijera.
+      - El resultado puede ser: "Player 1", "Player 2", "Tie" (empate)
+      - La función recibe un listado que contiene pares, representando cada jugada.
+      - El par puede contener combinaciones de "R" (piedra), "P" (papel) o "S" (tijera).
+      - Ejemplo. Entrada: [("R","S"), ("S","R"), ("P","S")]. Resultado: "Player 2".
     `,
     ejemplo: "jugar('piedra') // 'empate' o ganador",
-    codigo: "",
+    codigo: dedent`
+      function juegoPPT(jugadas) {
+        let winPlayer1 = 0;
+        let winPlayer2 = 0;
+        let drawGame = 0
+
+        for(const [jugador1, jugador2] of jugadas) {
+          if(jugador1 === "R" && jugador2 === "S" || jugador1 === "S" && jugador2 === "P" || jugador1 === "P" && jugador2 === "R"){
+            winPlayer1 += 1;
+            console.log("Esta ronda ganó el Jugador 1");
+          } else if (jugador1 === jugador2) {
+            drawGame += 1;
+            console.log("Esta ronda términa en empate");
+          } else {
+            winPlayer2 += 1;
+            console.log("Esta ronda ganó el Jugador 2");
+          }
+        }
+
+        if (winPlayer1 > winPlayer2) return "Resultado final == Player 1";
+        if (winPlayer2 > winPlayer1) return "Resultado final == Player 2";
+        return "Resultado final == Tie";
+      }
+    `,
     tasaExito: 93,
   },
   {
@@ -801,7 +828,9 @@ export const ejercicios: Ejercicio[] = [
     nivel: 2,
     dificultad: "medio",
     descripcion: dedent`
-      Dibuja un cuadrado y un triángulo en un plano 2D usando caracteres o gráficos simples.
+      Crea un programa que dibuje un cuadrado o un triángulo con asteriscos "*".
+      Indicaremos el tamaño del lado y si la figura a dibujar es una u otra.
+      EXTRA: ¿Eres capaz de dibujar más figuras?
     `,
     ejemplo: "dibujarCuadrado(4) // ****\n****",
     codigo: dedent`
@@ -827,27 +856,15 @@ export const ejercicios: Ejercicio[] = [
 
             console.log(linea);
           }
-        }
-
-        else if (tipo === "triangulo") {
+        } else if (tipo === "triangulo") {
           for (let i = 1; i <= tamaño; i++) {
             let linea = "";
-            
-            linea += " ".repeat(tamaño - i);
-            
-            for (let j = 1; j <= i; j++) {
-              if (j >= 2 || j === i || i === tamaño) {
-                linea += "*";
-              } else {
-                linea += "*";
-              }
-            }
+            linea += "".repeat(tamaño - i);
+            linea += "*".repeat(2 * i - 1);
 
             console.log(linea);
           }
-        }
-
-        else {
+        } else {
           console.log("Tipo no válido. Usa 'cuadrado' o 'triangulo'.");
         }
       }
@@ -861,10 +878,26 @@ export const ejercicios: Ejercicio[] = [
     nivel: 2,
     dificultad: "medio",
     descripcion: dedent`
-      Determina si dos vectores son ortogonales calculando su producto escalar.
+      Crea un programa que determine si dos vectores son ortogonales.
+      - Los dos array deben tener la misma longitud.
+      - Cada vector se podría representar como un array. Ejemplo: [1, -2]
     `,
     ejemplo: "ortogonales([1,0], [0,1]) // true",
-    codigo: "",
+    codigo: dedent`
+      function ortogonales(v1, v2) {
+        let vectorOrtogonal = 0;
+        if (v1.length !== v2.length)
+          return "Los vectores deben tener la misma longitud";
+
+        for (let i = 0; i < v1.length; i++) {
+          vectorOrtogonal += v1[i] * v2[i];
+        }
+
+        if (vectorOrtogonal !== 0) return "Los vectores no son ortogonales";
+
+        return "Los vectores si son ortogonales";
+      }
+    `,
     tasaExito: 85,
   },
   {
@@ -874,10 +907,70 @@ export const ejercicios: Ejercicio[] = [
     nivel: 2,
     dificultad: "medio",
     descripcion: dedent`
-      Simula una máquina expendedora que recibe dinero y devuelve productos.
+      Simula el funcionamiento de una máquina expendedora creando una operación que reciba dinero (array de monedas) y un número que indique la selección del producto.
+      - El programa retornará el nombre del producto y un array con el dinero de vuelta (con el menor número de monedas).
+      - Si el dinero es insuficiente o el número de producto no existe, deberá indicarse con un mensaje y retornar todas las monedas.
+      - Si no hay dinero de vuelta, el array se retornará vacío.
+      - Para que resulte más simple, trabajaremos en céntimos con monedas de 5, 10, 50, 100 y 200.
+      - Debemos controlar que las monedas enviadas estén dentro de las soportadas.
     `,
     ejemplo: "comprar('agua', 1.5) // cambio 0.5",
-    codigo: "",
+    codigo: dedent`
+      const MONEDAS_VALIDAS = {
+        FIVE: 5,
+        TEN: 10,
+        FIFTY: 50,
+        ONEHUNDRED: 100,
+        TWOHUNDRED: 200,
+      };
+
+      const DENOMINACIONES = [200, 100, 50, 10, 5];
+
+      const PRODUCTS = {
+        1: ["Agua", 50],
+        2: ["Coca Cola", 150],
+        3: ["Cerveza", 300],
+        4: ["Pizza", 500],
+        5: ["Galleta", 50],
+        6: ["Donas", 125],
+      };
+
+      function maquinaExpendedora(dinero, idProducto) {
+        const product = PRODUCTS[idProducto];
+
+        const monedasInsertadas = [];
+        let totalDinero = 0;
+
+        for (const clave of dinero) {
+          if (!(clave in MONEDAS_VALIDAS)) {
+            return ["Moneda no válida detectada", dinero];
+          }
+          monedasInsertadas.push(clave);
+          totalDinero += MONEDAS_VALIDAS[clave];
+        }
+
+        if (!product) {
+          return ["Producto no existe", monedasInsertadas];
+        }
+
+        if (totalDinero < product[1]) {
+          return ["Dinero insuficiente", monedasInsertadas];
+        }
+
+        let cambioValor = totalDinero - product[1];
+
+        const cambioMonedas = [];
+        for (const den of DENOMINACIONES) {
+          while (cambioValor >= den) {
+            const clave = Object.keys(MONEDAS_VALIDAS).find(k => MONEDAS_VALIDAS[k] === den);
+            cambioMonedas.push(clave);
+            cambioValor -= den;
+          }
+        }
+
+        return [product[0], cambioMonedas];
+      }
+    `,
     tasaExito: 90,
   },
   {
@@ -887,10 +980,38 @@ export const ejercicios: Ejercicio[] = [
     nivel: 1,
     dificultad: "fácil",
     descripcion: dedent`
-      Ordena una lista de números utilizando un algoritmo de ordenamiento básico.
+      Crea una función que ordene y retorne una matriz de números.
+      - La función recibirá un listado (por ejemplo [2, 4, 6, 8, 9]) y un parámetro adicional "Asc" o "Desc" para indicar si debe ordenarse de menor a mayor o de mayor a menor.
+      - No se pueden utilizar funciones propias del lenguaje que lo resuelvan automáticamente.
     `,
     ejemplo: "ordenar([3,1,2]) // [1,2,3]",
-    codigo: "",
+    codigo: dedent`
+      function ascDesc(arr, orden) {
+        if (orden === "asc") {
+          for (let i = 0; i < arr.length - 1; i++) {
+            for (let j = 0; j < arr.length - 1 - i; j++) {
+              if (arr[j] > arr[j + 1]) {
+                const temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+              }
+            }
+          }
+          return arr;
+        } else if (orden === "desc") {
+          for (let i = 0; i < arr.length - 1; i++) {
+            for (let j = 0; j < arr.length - 1 - i; j++) {
+              if (arr[j] < arr[j + 1]) {
+                const temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+              }
+            }
+          }
+          return arr;
+        }
+      }
+    `,
     tasaExito: 94,
   },
   {
@@ -900,10 +1021,38 @@ export const ejercicios: Ejercicio[] = [
     nivel: 2,
     dificultad: "medio",
     descripcion: dedent`
-      Crea un marco o borde alrededor de una palabra o frase usando caracteres.
+      Crea una función que reciba un texto y muestre cada palabra en una línea, formando un marco rectangular de asteriscos.
+      - ¿Qué te parece el reto? Se vería así:
+     **********
+     * ¿Qué   *
+     * te     *
+     * parece *
+     * el     *
+     * reto?  *
+     **********
     `,
-    ejemplo: "marco('Hola') // +----+\n|Hola|",
-    codigo: "",
+    ejemplo: "",
+    codigo: dedent`
+      function marcoDeTexto(texto) {
+        const palabras = texto.split(" ");
+        let maxLength = 0;
+
+        for (const palabra of palabras) {
+          if (palabra.length > maxLength) {
+            maxLength = palabra.length;
+          }
+        }
+
+        const borde = "*".repeat(maxLength + 4);
+        console.log(borde);
+        for (const palabra of palabras) {
+          const espacios = " ".repeat(maxLength - palabra.length);
+          const linea = "* {palabra}{espacios} *"; //Aquí va con comillas invertidas y concatenadas las variables
+          console.log(linea);
+        }
+        console.log(borde);
+      }
+    `,
     tasaExito: 88,
   },
   {
@@ -913,10 +1062,23 @@ export const ejercicios: Ejercicio[] = [
     nivel: 2,
     dificultad: "medio",
     descripcion: dedent`
-      Determina si un año es bisiesto según las reglas del calendario gregoriano.
+      Crea una función que imprima los 30 próximos años bisiestos siguientes a uno dado.
+      - Utiliza el menor número de líneas para resolver el ejercicio.
     `,
     ejemplo: "esBisiesto(2024) // true",
-    codigo: "",
+    codigo: dedent`
+      function biciesto() {
+        let contador = 0;
+        let año = 2025;
+        for(let i = 0; contador < 30; i++) {
+          año += 1;
+          if(año % 4 === 0 && año % 100 !== 0 || año % 400 === 0) {
+            añosBiciestos += 1;
+            console.log("Este año es biciesto", año)
+          }
+        }
+      }
+    `,
     tasaExito: 95,
   },
   {
@@ -926,10 +1088,15 @@ export const ejercicios: Ejercicio[] = [
     nivel: 2,
     dificultad: "medio",
     descripcion: dedent`
-      Convierte un tiempo dado en segundos a su formato en horas, minutos y segundos.
+      Dado un listado de números, encuentra el SEGUNDO más grande
     `,
     ejemplo: "formatoTiempo(3661) // '01:01:01'",
-    codigo: "",
+    codigo: dedent`
+      function segundoNumero(arrNumeros) {
+        arrNumeros.sort((a, b) => b - a);
+        return "El segundo número mas grande es " + arrNumeros[1];
+      }
+    `,
     tasaExito: 92,
   },
   {
