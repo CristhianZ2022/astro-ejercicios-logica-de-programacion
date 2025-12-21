@@ -1299,10 +1299,79 @@ export const ejercicios: Ejercicio[] = [
     nivel: 2,
     dificultad: "medio",
     descripcion: dedent`
-      Lista o filtra los lanzamientos de juegos de The Legend of Zelda por año o plataforma.
+      ¡Han anunciado un nuevo "The Legend of Zelda"!
+      Se llamará "Tears of the Kingdom" y se lanzará el 12 de mayo de 2023.
+      Pero, ¿recuerdas cuánto tiempo ha pasado entre los distintos "The Legend of Zelda" de la historia?
+      Crea un programa que calcule cuántos años y días hay entre 2 juegos de Zelda que tú selecciones.
+      - Debes buscar cada uno de los títulos y su día de lanzamiento (si no encuentras el día exacto puedes usar el mes, o incluso inventártelo)
     `,
     ejemplo: "lanzamientosZelda('NES') // lista de juegos",
-    codigo: "",
+    codigo: dedent`
+      function lanzamientoTheLegendOfZelda(juego, juego2) {
+        const juegoArray = juego[1].split("/");
+        const juego2Array = juego2[1].split("/");
+
+        const [dia, mes, año] = juegoArray;
+        const [dia2, mes2, año2] = juego2Array;
+
+        let dias = 0;
+        let meses = 0;
+        let años = 0;
+        if(año > año2) {
+          años = año - año2;
+          if(mes2 > mes) {
+            años = años -1;
+          }
+        } else if (año2 > año){
+          años = año2 - año;
+          if(mes > mes2) {
+            años = años -1;
+          }
+        }
+
+        if(mes > mes2 && (año > año2 || año === año2)) {
+          meses = mes - mes2;
+          if(dia2 > dia) {
+            meses = meses - 1;
+          }
+        } else if(mes2 > mes && (año2 > año || año === año2)) {
+          meses = mes2 - mes;
+          if(dia > dia2) {
+            meses = meses - 1;
+          }
+        } else if(mes > mes2 && (año2 > año || año === año2)) {
+          meses = mes2 - mes + 12;
+          if(dia > dia2) {
+            meses = meses - 1;
+          }
+        } else if(mes2 > mes && (año > año2 || año === año2)){
+          meses = mes - mes2 + 12;
+          if(dia2 > dia) {
+            meses = meses - 1;
+          }
+        }
+
+        if(dia > dia2 && (mes > mes2 || mes === mes2)) {
+          dias = dia - dia2;
+        } else if(dia2 > dia && (mes2 > mes || mes2 === mes)) {
+          dias = dia - dia2 + 30;
+        } else if(dia > dia2 && mes2 > mes){
+          if(mes2 === 2){
+            dias = dia2 - dia + 28;
+          } else {
+            dias = dia2 - dia + 30;
+          }
+        } else if(dia2 > dia && (mes > mes2 || mes2 === mes)){
+          if(mes === 2){
+            dias = dia - dia2 + 28;
+          } else {
+            dias = dia - dia2 + 30;
+          }
+        }
+
+        return "Entre el lanzamiento del juego " + juego[0] + " y el lanzamiento del juego " + juego2[0] + " hay " + dias + " días " +      meses + " meses " + años + " años.";
+      }
+    `,
     tasaExito: 87,
   },
   {
