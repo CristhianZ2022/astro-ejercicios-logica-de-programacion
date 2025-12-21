@@ -1106,10 +1106,24 @@ export const ejercicios: Ejercicio[] = [
     nivel: 2,
     dificultad: "medio",
     descripcion: dedent`
-      Calcula el signo zodiacal chino correspondiente a un año dado.
+      Crea un función, que dado un año, indique el elemento y animal correspondiente en el ciclo sexagenario del zodíaco chino.
+      - Info: https://www.travelchinaguide.com/intro/astrology/60year-cycle.htm
+      - El ciclo sexagenario se corresponde con la combinación de los elementos madera, fuego, tierra, metal, agua y los animales rata, buey, tigre, conejo, dragón, serpiente, caballo, oveja, mono, gallo, perro, cerdo (en este orden).
+      - Cada elemento se repite dos años seguidos.
+      - El último ciclo sexagenario comenzó en 1984 (Madera Rata).
     `,
     ejemplo: "signoChino(2024) // 'Dragón'",
-    codigo: "",
+    codigo: dedent`
+      function sexagenarioChino(año) {
+        const signo = cicloSexagenario.find(obj => obj.año === año);
+
+        if(!signo) {
+          return "Has seleccionado un año incorrecto";
+        } else {
+          return El año S{año} corresponde al {signo.animal} de S{signo.elemento}
+        }
+      }
+    `,
     tasaExito: 86,
   },
   {
@@ -1119,10 +1133,24 @@ export const ejercicios: Ejercicio[] = [
     nivel: 2,
     dificultad: "medio",
     descripcion: dedent`
-      Encuentra números faltantes en una secuencia aparentemente continua.
+      Dado un array de enteros ordenado y sin repetidos, crea una función que calcule y retorne todos los que faltan entre el mayor y el menor.
+      - Lanza un error si el array de entrada no es correcto.
     `,
-    ejemplo: "perdidos([1,2,4,5]) // 3",
-    codigo: "",
+    ejemplo: "perdidos([5,4,2,1]) // 3",
+    codigo: dedent`
+      function numerosPerdidos() {
+        numeros.sort((a, b) => b - a);
+        const numerosPerdidos = [];
+
+        for (let i = numeros[0]; i >= numeros.at(-1); i--) {
+          if (!numeros.includes(i)) {
+            numerosPerdidos.push(i);
+          }
+        }
+
+        return "Los numeros Perdidos son" + numerosPerdidos;
+      }
+    `,
     tasaExito: 89,
   },
   {
@@ -1132,10 +1160,48 @@ export const ejercicios: Ejercicio[] = [
     nivel: 2,
     dificultad: "medio",
     descripcion: dedent`
-      Simula un combate entre dos Pokémon con estadísticas y ataques.
+      Crea un programa que calcule el daño de un ataque durante una batalla Pokémon.
+      - La fórmula será la siguiente: daño = 50 * (ataque / defensa) * efectividad
+      - Efectividad: x2 (súper efectivo), x1 (neutral), x0.5 (no es muy efectivo)
+      - Sólo hay 4 tipos de Pokémon: Agua, Fuego, Planta y Eléctrico (buscar su efectividad)
+      - El programa recibe los siguientes parámetros:
+      - Tipo del Pokémon atacante.
+      - Tipo del Pokémon defensor.
+      - Ataque: Entre 1 y 100.
+      - Defensa: Entre 1 y 100.
     `,
     ejemplo: "batalla(pikachu, charmander) // ganador",
-    codigo: "",
+    codigo: dedent`
+      function pokemonWar(pokemon1, pokemon2) {
+        const tipoAtaque = pokemon1[0];
+        const tipoDefensa = pokemon2[0];
+        const ataque = pokemon1[1];
+        const defensa = pokemon2[1];
+
+        const tiposValidos = ["Agua", "Fuego", "Planta", "Eléctrico"];
+        if (!tiposValidos.includes(tipoAtaque) || !tiposValidos.includes(tipoDefensa)) {
+          return "Tipo inválido. Solo: Agua, Fuego, Planta, Eléctrico.";
+        }
+        if (ataque < 1 || ataque > 100 || defensa < 1 || defensa > 100) {
+          return "Ataque/Defensa debe estar entre 1 y 100.";
+        }
+
+        const efectividad = {
+          "Agua": { "Fuego": 2, "Agua": 0.5, "Planta": 0.5, "Eléctrico": 1 },
+          "Fuego": { "Fuego": 0.5, "Agua": 0.5, "Planta": 2, "Eléctrico": 1 },
+          "Planta": { "Agua": 2, "Fuego": 0.5, "Planta": 0.5, "Eléctrico": 1 },
+          "Eléctrico": { "Agua": 2, "Fuego": 1, "Planta": 0.5, "Eléctrico": 0.5 }
+        };
+
+        let multi = efectividad[tipoAtaque]?.[tipoDefensa] || 1;
+
+        daño = Math.floor(50 * (ataque / defensa) * multi);
+
+        return "El ataque realizado por el pokemon atacante es de " + daño + "." 
+      }
+
+      console.log(pokemonWar(["Agua", 100], ["Planta", 50]));
+    `,
     tasaExito: 83,
   },
   {
@@ -1145,10 +1211,85 @@ export const ejercicios: Ejercicio[] = [
     nivel: 2,
     dificultad: "medio",
     descripcion: dedent`
-      Genera o analiza una estructura relacionada con los anillos de poder de la saga.
+      ¡La Tierra Media está en guerra! En ella lucharán razas leales a Sauron contra otras bondadosas que no quieren que el mal reine sobre sus tierras.
+      Cada raza tiene asociado un "valor" entre 1 y 5:
+      - Razas bondadosas: Pelosos (1), Sureños buenos (2), Enanos (3), Númenóreanos (4), Elfos (5)
+      - Razas malvadas: Sureños malos (2), Orcos (2), Goblins (2), Huargos (3), Trolls (5)
+      Crea un programa que calcule el resultado de la batalla entre los 2 tipos de ejércitos:
+      - El resultado puede ser que gane el bien, el mal, o exista un empate.
+      Dependiendo de la suma del valor del ejército y el número de integrantes.
+      - Cada ejército puede estar compuesto por un número de integrantes variable de cada raza.
+      - Tienes total libertad para modelar los datos del ejercicio.
+      Ej: 1 Peloso pierde contra 1 Orco
+          2 Pelosos empatan contra 1 Orco
+          3 Pelosos ganan a 1 Orco
     `,
     ejemplo: "anillos(3) // lista de anillos",
-    codigo: "",
+    codigo: dedent`
+      function anillosDelPoder(rBondadosos, rSauron) {
+        const razasParticipantes = [ "Peloso", "Sureños buenos", "Enano", "Númenóreano", "Elfo", "Sureños malos", "Orco", "Goblin", "Huargo", "Troll" ];
+
+        const bondadosos = {
+          "Peloso" : 1,
+          "Sureños buenos": 2,
+          "Enano": 3,
+          "Númenóreano": 4,
+          "Elfo": 5
+        }
+
+        const malvados = {
+          "Sureños malos": 2,
+          "Orco": 2,
+          "Goblin": 2,
+          "Huargo": 3,
+          "Troll": 5
+        }
+
+        const buenos = {};
+        const txtBuenos = [];
+        let poderBuenos = 0;
+        for(const raza of rBondadosos) {
+          if (!razasParticipantes.includes(raza)) {
+            return "Razas no participantes, las únicas son: " + razasParticipantes.join(", ");
+          }
+          if (!(raza in bondadosos)) {
+            return "Raza " + {raza} + " no es bondadosa. Solo pueden ser: " + Object.keys(bondadosos).join(", ");
+          }
+
+          buenos[raza] = (buenos[raza] || 0) + 1;
+          txtBuenos.push(S{buenos[raza]} S{raza}S{buenos[raza] > 1 ? 's' : ''},);
+          poderBuenos += bondadosos[raza];
+        }
+
+        const malos = {};
+        const txtMalos = []
+        let poderMalos = 0;
+        for(const raza of rSauron) {
+          if (!razasParticipantes.includes(raza)) {
+            return "Razas no participantes, las únicas son: " + razasParticipantes.join(", ");
+          }
+          if (!(raza in malvados)) {
+            return Raza "S{raza}" no es malvada. Solo pueden ser: S{Object.keys(malvados).join(", ")};
+          }
+          malos[raza] = (malos[raza] || 0) + 1;
+          txtMalos.push(S{malos[raza]} S{raza}S{malos[raza] > 1 ? 's' : ''},);
+          poderMalos += malvados[raza];
+        }
+
+        if(poderBuenos > poderMalos) {
+          let resultadoDeBatalla = txtBuenos.join(' ').concat(" ganaron contra ", txtMalos.join(' '));
+          return resultadoDeBatalla;
+
+        } else if(poderBuenos < poderMalos) {
+          let resultadoDeBatalla = txtBuenos.join(' ').concat(" perdieron contra ", txtMalos.join(' '));
+          return resultadoDeBatalla;
+
+        } else {
+          let resultadoDeBatalla = txtBuenos.join(' ').concat(" empataron contra ", txtMalos.join(' '));
+          return resultadoDeBatalla;
+        }
+      }
+    `,
     tasaExito: 81,
   },
   {
